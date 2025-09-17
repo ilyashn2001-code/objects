@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Объекты</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Строительные объекты</title>
+  <link rel="stylesheet" href="objects.css" />
 </head>
 <body>
   <div class="container">
@@ -23,34 +23,78 @@
 
     <main class="main">
       <header class="topbar">
-        <h1>Объекты</h1>
-        <input type="text" id="searchInput" placeholder="Поиск по названию..." />
+        <h1>Строительные объекты</h1>
+        <button class="add-btn">+ Добавить объект</button>
       </header>
 
-      <div class="filters">
-        <button class="filter-toggle">Тип объекта ⌄</button>
-        <div class="filter-options" style="display: none;">
-          <label><input type="checkbox" value="Детский сад" /> Детский сад</label>
-          <label><input type="checkbox" value="Магазин" /> Магазин</label>
-          <label><input type="checkbox" value="Жилое помещение" /> Жилое помещение</label>
-          <label><input type="checkbox" value="Парк" /> Парк</label>
-          <label><input type="checkbox" value="Метро" /> Метро</label>
-          <label><input type="checkbox" value="Салон красоты" /> Салон красоты</label>
-        </div>
+      <div class="filters-bar">
+        <input type="text" id="searchInput" placeholder="Поиск по названию или адресу" />
+        <button>🏙 Район</button>
+        <button>📍 Тип объекта</button>
+        <button>📅 Дата начала/окончания</button>
+        <button>👤 Ответственный</button>
+        <button>📋 Наличие лаурий</button>
+        <button>⚠️ Наличие нарушений</button>
       </div>
 
-      <div id="objectList" class="object-list">
-        <div class="object-card" data-title="Детский сад №12" data-type="Детский сад">
-          <h3>Детский сад №12</h3>
-          <span class="tag">Детский сад</span>
+      <div class="cards-container" id="objectList">
+        <!-- Пример карточки -->
+        <div class="object-card" data-title="Строительство школы" data-type="Образование">
+          <div class="card-header">
+            <h3>Строительство школы</h3>
+            <span class="status active">Активный</span>
+          </div>
+          <div class="progress">
+            <div class="bar" style="width: 42%"></div>
+          </div>
+          <p class="percent">42%</p>
+          <div class="meta">
+            <div class="user">
+              <img src="https://via.placeholder.com/32" alt="">
+              Андреев Ю.
+            </div>
+            <div class="details">
+              📄 Подробнее <span class="badge">5</span>
+            </div>
+            <div class="icon-info">📷 12</div>
+          </div>
         </div>
-        <div class="object-card" data-title="Магазин Пятерочка" data-type="Магазин">
-          <h3>Магазин Пятерочка</h3>
-          <span class="tag">Магазин</span>
+
+        <div class="object-card" data-title="Офисное здание" data-type="Коммерция">
+          <div class="card-header">
+            <h3>Офисное здание</h3>
+            <span class="status done">Завершён</span>
+          </div>
+          <p class="date">05.09.2022 — 20.12.2023</p>
+          <div class="meta">
+            <div class="user">
+              <img src="https://via.placeholder.com/32" alt="">
+              Васильева А.
+            </div>
+            <div class="details">
+              📄 Подробнее <span class="badge">4</span>
+            </div>
+            <div class="icon-info">🖼 4</div>
+          </div>
         </div>
-        <div class="object-card" data-title="Салон Мила" data-type="Салон красоты">
-          <h3>Салон Мила</h3>
-          <span class="tag">Салон красоты</span>
+
+        <div class="object-card" data-title="Торговый центр" data-type="Магазин">
+          <div class="card-header">
+            <h3>Торговый центр</h3>
+            <span class="status paused">На паузе</span>
+            <span class="warning">Анес</span>
+          </div>
+          <p class="date">12.07.2023 — 25.11.2023</p>
+          <div class="meta">
+            <div class="user">
+              <img src="https://via.placeholder.com/32" alt="">
+              Петров Д.
+            </div>
+            <div class="details">
+              ℹ️ Подробнее
+            </div>
+            <div class="icon-info">👥 108 дотоясов</div>
+          </div>
         </div>
       </div>
     </main>

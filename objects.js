@@ -4,6 +4,10 @@ document.getElementById('searchInput').addEventListener('input', () => {
 
   cards.forEach(card => {
     const title = card.getAttribute('data-title').toLowerCase();
-    card.style.display = title.includes(query) ? 'block' : 'none';
+    if (title.includes(query)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
   });
 });

@@ -56,3 +56,22 @@ document.getElementById('searchInput').addEventListener('input', function() {
 });
 
 renderCards(objects);
+// Открытие и закрытие модалки
+function initChatModals() {
+  const modal = document.getElementById('chatModal');
+  const closeBtn = document.querySelector('.close-chat');
+
+  // Закрытие
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Делегирование на кнопки "Открыть чат"
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('chat-open-btn')) {
+      modal.style.display = 'flex';
+    }
+  });
+}
+
+initChatModals();

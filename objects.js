@@ -20,6 +20,7 @@ function renderCards(list) {
   const container = document.getElementById('objectList');
   if (!container) return;
   container.innerHTML = '';
+
   list.forEach(obj => {
     const card = document.createElement('div');
     card.className = 'object-card';
@@ -49,29 +50,21 @@ function renderCards(list) {
   });
 }
 
-document.getElementById('searchInput').addEventListener('input', function() {
+document.getElementById('searchInput').addEventListener('input', function () {
   const val = this.value.toLowerCase();
   const filtered = objects.filter(o => o.title.toLowerCase().includes(val));
   renderCards(filtered);
 });
 
 renderCards(objects);
-// Открытие и закрытие модалки
-function initChatModals() {
+
+// === Чат-модалка ===
+document.addEventListener('click', function (e) {
   const modal = document.getElementById('chatModal');
-  const closeBtn = document.querySelector('.close-chat');
-
-  // Закрытие
-  closeBtn.addEventListener('click', () => {
+  if (e.target.classList.contains('chat-open-btn')) {
+    modal.style.display = 'flex';
+  }
+  if (e.target.classList.contains('chat-close')) {
     modal.style.display = 'none';
-  });
-
-  // Делегирование на кнопки "Открыть чат"
-  document.addEventListener('click', (e) => {
-    if (e.target && e.target.classList.contains('chat-open-btn')) {
-      modal.style.display = 'flex';
-    }
-  });
-}
-
-initChatModals();
+  }
+});

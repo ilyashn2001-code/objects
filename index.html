@@ -39,41 +39,36 @@
     </main>
   </div>
 
-  <!-- Модальное окно чата -->
+  <!-- Только нужная модалка чата -->
   <div id="chatModal" class="chat-modal">
-    <div class="chat-content">
-      <div class="chat-header">
-        <h2>Чат</h2>
-        <span class="close-chat">&times;</span>
+    <div class="chat-box">
+      <div class="chat-box-header">
+        <h3>Чат по объекту</h3>
+        <span class="chat-close">&times;</span>
       </div>
-      <div class="chat-body">
-        <p>Привет! Это окно чата. Здесь скоро появятся сообщения 😊</p>
+      <div class="chat-box-body">
+        <p>Здесь будет отображаться переписка по объекту.</p>
       </div>
-      <div class="chat-input">
-        <input type="text" placeholder="Отправить сообщение..." />
+      <div class="chat-box-input">
+        <input type="text" placeholder="Введите сообщение..." />
       </div>
     </div>
   </div>
 
   <script src="objects.js"></script>
   <script>
-    // Инициализация модалки чата
-    function initChatModal() {
-      const modal = document.getElementById('chatModal');
-      const closeBtn = document.querySelector('.close-chat');
+    const chatModal = document.getElementById('chatModal');
+    const closeChat = document.querySelector('.chat-close');
 
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.classList.contains('chat-open-btn')) {
+        chatModal.style.display = 'flex';
+      }
+    });
 
-      document.addEventListener('click', (e) => {
-        if (e.target && e.target.classList.contains('chat-open-btn')) {
-          modal.style.display = 'flex';
-        }
-      });
-    }
-
-    initChatModal();
+    closeChat.addEventListener('click', () => {
+      chatModal.style.display = 'none';
+    });
   </script>
 </body>
 </html>

@@ -4,7 +4,10 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
 }
-
+html, body {
+  height: 100%;
+  overflow-y: auto;
+}
 body {
   background: #f4f6fa;
   display: flex;
@@ -113,9 +116,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 20px;
-  max-height: 75vh;
-  overflow-y: auto;
-  padding-right: 5px;
 }
 
 .object-card {

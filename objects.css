@@ -189,7 +189,7 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.25);
 }
 
-
+/* ===== Заголовок ===== */
 .chat-box-header {
   background: #1e2a3a;
   color: white;
@@ -209,16 +209,19 @@ body {
   font-size: 20px;
 }
 
+/* ===== Контент чата (гибкий блок) ===== */
 .chat-box-body {
+  flex: 1;
   padding: 16px;
-  height: 180px;
   overflow-y: auto;
   font-size: 14px;
 }
 
+/* ===== Ввод сообщения ===== */
 .chat-box-input {
   border-top: 1px solid #ccc;
   padding: 10px;
+  background: #fff;
 }
 
 .chat-box-input input {
@@ -226,4 +229,5 @@ body {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  font-size: 14px;
 }

@@ -11,11 +11,11 @@ body {
   color: #1d1d1f;
 }
 
-.container {
+.app-container {
   display: flex;
   width: 100%;
-  min-height: 100vh;
 }
+
 
 .sidebar {
   width: 220px;
@@ -29,7 +29,6 @@ body {
   font-size: 18px;
   margin-bottom: 30px;
   line-height: 1.2;
-  font-weight: bold;
 }
 
 .sidebar ul {
@@ -67,15 +66,25 @@ body {
 }
 
 
+
 .main {
   flex: 1;
   padding: 30px;
 }
 
+
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1e2a3a;
+  margin: 0;
 }
 
 .filters {

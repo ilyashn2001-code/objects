@@ -56,3 +56,46 @@ document.getElementById('searchInput').addEventListener('input', function() {
 });
 
 renderCards(objects);
+// Открытие и закрытие чата
+document.querySelector('.chat-link').addEventListener('click', () => {
+  document.getElementById('chatModal').style.display = 'flex';
+});
+
+document.querySelector('.close-chat').addEventListener('click', () => {
+  document.getElementById('chatModal').style.display = 'none';
+});
+
+// Ответы бота
+document.getElementById('sendMessage').addEventListener('click', sendMessage);
+document.getElementById('userMessage').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') sendMessage();
+});
+
+function sendMessage() {
+  const input = document.getElementById('userMessage');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  appendMessage('user', msg);
+  input.value = '';
+
+  setTimeout(() => {
+    const reply = generateBotReply(msg);
+    appendMessage('bot', reply);
+  }, 500);
+}
+
+function appendMessage(type, text) {
+  const msgElem = document.createElement('div');
+  msgElem.className = type;
+  msgElem.textContent = text;
+  document.getElementById('chatMessages').appendChild(msgElem);
+  document.getElementById('chatMessages').scrollTop = 9999;
+}
+
+function generateBotReply(msg) {
+  msg = msg.toLowerCase();
+  if (msg.includes('привет')) return 'Привет-привет! 👋';
+  if (msg.includes('объект')) return 'Информация об объектах отображена на экране 🏗️';
+  return 'Извините, я пока не понимаю такие команды 😅';
+}

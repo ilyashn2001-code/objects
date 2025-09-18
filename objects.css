@@ -6,7 +6,10 @@
 }
 html, body {
   height: 100%;
-  overflow-y: auto;
+}
+
+.container {
+  min-height: 100vh;
 }
 body {
   background: #f4f6fa;

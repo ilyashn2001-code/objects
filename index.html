@@ -20,9 +20,9 @@
     </aside>
 
     <main class="main">
-     <header class="header">
-  <h1>Строительные объекты</h1>
-</header>
+      <header class="header">
+        <h1>Строительные объекты</h1>
+      </header>
 
       <div class="filters">
         <input type="text" id="searchInput" placeholder="Поиск по названию или адресу" />
@@ -39,8 +39,41 @@
     </main>
   </div>
 
-  <script src="objects.js"></script>
- 
+  <!-- Модальное окно чата -->
+  <div id="chatModal" class="chat-modal">
+    <div class="chat-content">
+      <div class="chat-header">
+        <h2>Чат</h2>
+        <span class="close-chat">&times;</span>
+      </div>
+      <div class="chat-body">
+        <p>Привет! Это окно чата. Здесь скоро появятся сообщения 😊</p>
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Отправить сообщение..." />
+      </div>
+    </div>
+  </div>
 
+  <script src="objects.js"></script>
+  <script>
+    // Инициализация модалки чата
+    function initChatModal() {
+      const modal = document.getElementById('chatModal');
+      const closeBtn = document.querySelector('.close-chat');
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.classList.contains('chat-open-btn')) {
+          modal.style.display = 'flex';
+        }
+      });
+    }
+
+    initChatModal();
+  </script>
 </body>
 </html>

@@ -42,7 +42,7 @@ function renderCards(list) {
       <div class="actions">
         <button>Подробнее</button>
         <button>PDF</button>
-        <button>✏️</button>
+        <button class="chat-open-btn">Открыть чат ✏️</button>
       </div>
     `;
     container.appendChild(card);

@@ -87,30 +87,38 @@
     </div>
   </div>
 
+  <!-- Подключение логики -->
   <script src="objects.js"></script>
   <script>
-    const chatModal = document.getElementById('chatModal');
-    const closeChat = document.querySelector('.chat-close');
-    const themeToggle = document.getElementById('themeToggle');
+    document.addEventListener('DOMContentLoaded', function () {
+      // === Чат-модалка ===
+      const chatModal = document.getElementById('chatModal');
+      const closeChat = document.querySelector('.chat-close');
 
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.classList.contains('chat-open-btn')) {
-        chatModal.style.display = 'flex';
-      }
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.classList.contains('chat-open-btn')) {
+          chatModal.style.display = 'flex';
+        }
+        if (e.target && e.target.classList.contains('chat-close')) {
+          chatModal.style.display = 'none';
+        }
+      });
+
+      // === Переключение темы ===
+      const themeToggle = document.getElementById('themeToggle');
+
+      // Восстановление сохранённой темы
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+
+      // Переключение по клику
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
     });
-
-    closeChat.addEventListener('click', () => {
-      chatModal.style.display = 'none';
-    });
-
-    // Переключение темы
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
-    });
-
-    // Установка темы по умолчанию
-    document.documentElement.setAttribute('data-theme', 'light');
   </script>
 </body>
 </html>

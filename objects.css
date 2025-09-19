@@ -1,23 +1,54 @@
+:root {
+  --bg-color: #f7f9fc;
+  --text-color: #1e2a3a;
+  --sidebar-bg: #1e2a3a;
+  --sidebar-text: white;
+  --sidebar-active-bg: #2c3e50;
+  --accent: #1e88e5;
+  --accent-hover: #1565c0;
+  --card-bg: white;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+  --border-color: #ccc;
+  --input-bg: white;
+  --chat-bg: white;
+  --modal-bg: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f7f9fc;
+  --sidebar-bg: #1c1c1c;
+  --sidebar-text: #fff;
+  --sidebar-active-bg: #333;
+  --accent: #90caf9;
+  --accent-hover: #64b5f6;
+  --card-bg: #1e1e1e;
+  --card-shadow: rgba(255, 255, 255, 0.05);
+  --border-color: #444;
+  --input-bg: #2a2a2a;
+  --chat-bg: #1e1e1e;
+  --modal-bg: rgba(255, 255, 255, 0.15);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
+
 html, body {
   height: 100%;
+  background: var(--bg-color);
+  color: var(--text-color);
 }
 
 .container {
   min-height: 100vh;
 }
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
   font-size: 14px;
-  background: #f7f9fc;
-  color: #222;
 }
 
 .app-container {
@@ -26,13 +57,11 @@ body {
   min-height: 100vh;
 }
 
-
-
 .sidebar {
   width: 220px;
-  background-color: #1e2a3a;
-  color: white;
-  padding: 30px 20px 20px 20px; /* ⬅️ верх = 30px */
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 30px 20px 20px 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -63,8 +92,8 @@ body {
   position: relative;
   font-weight: bold;
   opacity: 1;
-  background-color: #2c3e50;
-  padding-left: 14px; /* левая обводка */
+  background-color: var(--sidebar-active-bg);
+  padding-left: 14px;
 }
 
 .sidebar li.active::before {
@@ -74,44 +103,30 @@ body {
   top: 0;
   width: 4px;
   height: 100%;
-  background-color: #1e88e5;
+  background-color: var(--accent);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-
-
-
 
 .main {
   flex: 1;
   padding: 30px;
 }
 
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 0;
   margin-bottom: 20px;
-  padding-top: 10px; /* <- это можно подрегулировать под твой вкус */
+  padding-top: 10px;
 }
 
 .header h1 {
   font-size: 28px;
   font-weight: 600;
-  color: #1e2a3a;
+  color: var(--text-color);
   margin: 0;
 }
-
-
-.header h1 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #1e2a3a;
-  margin: 0;
-}
-
 
 .filters {
   margin: 20px 0;
@@ -122,20 +137,27 @@ body {
 
 .filters input {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
   border-radius: 6px;
   flex: 1 1 300px;
+  color: var(--text-color);
 }
 
 .filters button {
   padding: 10px 14px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  background: white;
+  background: var(--accent);
+  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.filters button:hover {
+  background: var(--accent-hover);
 }
 
 .arrow {
@@ -150,9 +172,9 @@ body {
 }
 
 .object-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px var(--card-shadow);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -202,7 +224,7 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   font-size: 14px;
-  color: #444;
+  color: var(--text-color);
 }
 
 .actions {
@@ -215,12 +237,13 @@ body {
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  background: white;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-color);
   cursor: pointer;
 }
 
-/* ===== 💬 МОДАЛЬНОЕ ОКНО ЧАТА ===== */
+/* 💬 МОДАЛКА */
 .chat-modal {
   display: none;
   position: fixed;
@@ -228,26 +251,25 @@ body {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: var(--modal-bg);
   justify-content: center;
   align-items: center;
 }
 
 .chat-box {
-  width: 600px;   /* 500 * 1.2 */
-  height: 800px;  /* 400 * 2 */
-  background: white;
+  width: 600px;
+  height: 800px;
+  background: var(--chat-bg);
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 20px var(--card-shadow);
 }
 
-/* ===== Заголовок ===== */
 .chat-box-header {
-  background: #1e2a3a;
-  color: white;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
   padding: 12px 16px;
   display: flex;
   justify-content: space-between;
@@ -264,7 +286,6 @@ body {
   font-size: 20px;
 }
 
-/* ===== Контент чата (гибкий блок) ===== */
 .chat-box-body {
   flex: 1;
   padding: 16px;
@@ -272,17 +293,18 @@ body {
   font-size: 14px;
 }
 
-/* ===== Ввод сообщения ===== */
 .chat-box-input {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--border-color);
   padding: 10px;
-  background: #fff;
+  background: var(--input-bg);
 }
 
 .chat-box-input input {
   width: 100%;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   font-size: 14px;
+  background: var(--input-bg);
+  color: var(--text-color);
 }

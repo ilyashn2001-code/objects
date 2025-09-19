@@ -10,34 +10,30 @@
 
   <!-- Основной CSS -->
   <link rel="stylesheet" href="objects.css" />
+  <link rel="stylesheet" href="themes.css" />
 
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f7f9fc;
-      color: #1e2a3a;
-    }
-
-    .sidebar {
-      background-color: #1e2a3a;
-    }
-
-    .sidebar li.active::before {
-      background-color: #1e88e5;
     }
 
     .btn, .filters button {
-      background-color: #1e88e5;
-      color: #fff;
       border: none;
+      transition: background-color 0.3s ease;
     }
 
-    .btn:hover, .filters button:hover {
-      background-color: #1565c0;
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: auto;
     }
 
-    .header h1 {
-      color: #1e2a3a;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   </style>
 </head>
@@ -57,6 +53,7 @@
     <main class="main">
       <header class="header">
         <h1>Строительные объекты</h1>
+        <button id="themeToggle" class="theme-toggle" title="Переключить тему">🌗</button>
       </header>
 
       <div class="filters">
@@ -74,7 +71,7 @@
     </main>
   </div>
 
-  <!-- Только нужная модалка чата -->
+  <!-- Модалка чата -->
   <div id="chatModal" class="chat-modal">
     <div class="chat-box">
       <div class="chat-box-header">
@@ -94,6 +91,7 @@
   <script>
     const chatModal = document.getElementById('chatModal');
     const closeChat = document.querySelector('.chat-close');
+    const themeToggle = document.getElementById('themeToggle');
 
     document.addEventListener('click', (e) => {
       if (e.target && e.target.classList.contains('chat-open-btn')) {
@@ -104,6 +102,15 @@
     closeChat.addEventListener('click', () => {
       chatModal.style.display = 'none';
     });
+
+    // Переключение темы
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Установка темы по умолчанию
+    document.documentElement.setAttribute('data-theme', 'light');
   </script>
 </body>
 </html>

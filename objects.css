@@ -308,3 +308,58 @@ body {
   background: var(--input-bg);
   color: var(--text-color);
 }
+.theme-dark-lct .main {
+  background: linear-gradient(135deg, #1e003e, #b71c8d); /* фиолетово-розовый */
+  color: white;
+}
+
+.theme-dark-lct .object-card {
+  background-color: rgba(30, 30, 30, 0.8);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-dark-lct .object-card .meta span,
+.theme-dark-lct .object-card .percent {
+  color: #ddd;
+}
+
+.theme-dark-lct .header h1 {
+  color: white;
+}
+
+.theme-dark-lct .progress {
+  background-color: #444;
+}
+
+.theme-dark-lct .bar {
+  background-color: #b084f7; /* светло-фиолетовая полоска */
+}
+
+/* кнопки в карточках */
+.theme-dark-lct .actions button {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.theme-dark-lct .actions button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Чат-модалка */
+.theme-dark-lct .chat-box {
+  background: #2a0035;
+  color: white;
+}
+
+.theme-dark-lct .chat-box-input {
+  background: #1a1a1a;
+}
+
+.theme-dark-lct .chat-box-input input {
+  background: #2b2b2b;
+  color: white;
+  border: 1px solid #555;
+}
+

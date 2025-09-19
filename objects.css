@@ -14,8 +14,9 @@
   --modal-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* === DARK THEME OVERRIDES === */
 [data-theme="dark"] {
-  --bg-color: linear-gradient(135deg, #1e003e, #b71c8d); /* Фиолетово-розовый */
+  --bg-color: linear-gradient(135deg, #1e003e, #b71c8d);
   --text-color: #f7f9fc;
   --sidebar-bg: #1c1c1c;
   --sidebar-text: #fff;
@@ -30,6 +31,7 @@
   --modal-bg: rgba(255, 255, 255, 0.15);
 }
 
+/* === BASE STYLES === */
 * {
   margin: 0;
   padding: 0;
@@ -59,7 +61,7 @@ body {
   width: 220px;
   background-color: var(--sidebar-bg);
   color: var(--sidebar-text);
-  padding: 30px 20px 20px 20px;
+  padding: 30px 20px 20px;
   display: flex;
   flex-direction: column;
 }
@@ -243,7 +245,12 @@ body {
   cursor: pointer;
 }
 
-/* 💬 МОДАЛКА */
+.actions button:hover {
+  background-color: var(--accent-hover);
+  color: white;
+}
+
+/* === CHAT MODAL === */
 .chat-modal {
   display: none;
   position: fixed;
@@ -308,59 +315,3 @@ body {
   background: var(--input-bg);
   color: var(--text-color);
 }
-
-.theme-dark-lct .main {
-  background: linear-gradient(135deg, #1e003e, #b71c8d); /* фиолетово-розовый */
-  color: white;
-}
-
-.theme-dark-lct .object-card {
-  background-color: rgba(30, 30, 30, 0.8);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.theme-dark-lct .object-card .meta span,
-.theme-dark-lct .object-card .percent {
-  color: #ddd;
-}
-
-.theme-dark-lct .header h1 {
-  color: white;
-}
-
-.theme-dark-lct .progress {
-  background-color: #444;
-}
-
-.theme-dark-lct .bar {
-  background-color: #b084f7; /* светло-фиолетовая полоска */
-}
-
-/* кнопки в карточках */
-.theme-dark-lct .actions button {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.theme-dark-lct .actions button:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Чат-модалка */
-.theme-dark-lct .chat-box {
-  background: #2a0035;
-  color: white;
-}
-
-.theme-dark-lct .chat-box-input {
-  background: #1a1a1a;
-}
-
-.theme-dark-lct .chat-box-input input {
-  background: #2b2b2b;
-  color: white;
-  border: 1px solid #555;
-}
-

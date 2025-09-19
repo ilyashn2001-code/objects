@@ -68,3 +68,30 @@ document.addEventListener('click', function (e) {
     modal.style.display = 'none';
   }
 });
+
+// === Переключение темы ===
+const themeToggle = document.createElement('button');
+themeToggle.textContent = '🌗 Тема';
+themeToggle.style.position = 'absolute';
+themeToggle.style.top = '10px';
+themeToggle.style.right = '10px';
+themeToggle.style.padding = '6px 12px';
+themeToggle.style.background = 'var(--accent)';
+themeToggle.style.color = 'white';
+themeToggle.style.border = 'none';
+themeToggle.style.borderRadius = '6px';
+themeToggle.style.cursor = 'pointer';
+themeToggle.style.zIndex = '999';
+
+themeToggle.onclick = () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+};
+
+document.body.appendChild(themeToggle);
+
+// Устанавливаем тему при загрузке
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);

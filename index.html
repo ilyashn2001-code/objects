@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Строительные объекты</title>
 
-  <!-- Шрифт Montserrat -->
+  <!-- Шрифт -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Основной CSS -->
+  <!-- Стили -->
   <link rel="stylesheet" href="objects.css" />
   <link rel="stylesheet" href="themes.css" />
 
@@ -36,6 +36,9 @@
       align-items: center;
     }
   </style>
+
+  <!-- Подключаем JS с defer -->
+  <script src="objects.js" defer></script>
 </head>
 <body>
   <div class="app-container">
@@ -86,39 +89,5 @@
       </div>
     </div>
   </div>
-
-  <!-- Подключение логики -->
-  <script src="objects.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // === Чат-модалка ===
-      const chatModal = document.getElementById('chatModal');
-      const closeChat = document.querySelector('.chat-close');
-
-      document.addEventListener('click', (e) => {
-        if (e.target && e.target.classList.contains('chat-open-btn')) {
-          chatModal.style.display = 'flex';
-        }
-        if (e.target && e.target.classList.contains('chat-close')) {
-          chatModal.style.display = 'none';
-        }
-      });
-
-      // === Переключение темы ===
-      const themeToggle = document.getElementById('themeToggle');
-
-      // Восстановление сохранённой темы
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-
-      // Переключение по клику
-      themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-      });
-    });
-  </script>
 </body>
 </html>

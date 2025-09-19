@@ -15,18 +15,18 @@
 }
 
 [data-theme="dark"] {
-  --bg-color: #121212;
+  --bg-color: linear-gradient(135deg, #1e003e, #b71c8d); /* Фиолетово-розовый */
   --text-color: #f7f9fc;
   --sidebar-bg: #1c1c1c;
   --sidebar-text: #fff;
   --sidebar-active-bg: #333;
-  --accent: #90caf9;
-  --accent-hover: #64b5f6;
-  --card-bg: #1e1e1e;
+  --accent: #b084f7;
+  --accent-hover: #a64ac9;
+  --card-bg: rgba(30, 30, 30, 0.8);
   --card-shadow: rgba(255, 255, 255, 0.05);
-  --border-color: #444;
+  --border-color: #555;
   --input-bg: #2a2a2a;
-  --chat-bg: #1e1e1e;
+  --chat-bg: #2a0035;
   --modal-bg: rgba(255, 255, 255, 0.15);
 }
 
@@ -41,14 +41,12 @@ html, body {
   height: 100%;
   background: var(--bg-color);
   color: var(--text-color);
-}
-
-.container {
-  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 body {
   font-size: 14px;
+  min-height: 100vh;
 }
 
 .app-container {
@@ -62,7 +60,6 @@ body {
   background-color: var(--sidebar-bg);
   color: var(--sidebar-text);
   padding: 30px 20px 20px 20px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -70,13 +67,10 @@ body {
 .sidebar h2 {
   font-size: 18px;
   margin-bottom: 30px;
-  line-height: 1.2;
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .sidebar li {
@@ -89,11 +83,10 @@ body {
 }
 
 .sidebar li.active {
-  position: relative;
+  background-color: var(--sidebar-active-bg);
   font-weight: bold;
   opacity: 1;
-  background-color: var(--sidebar-active-bg);
-  padding-left: 14px;
+  position: relative;
 }
 
 .sidebar li.active::before {
@@ -104,8 +97,7 @@ body {
   width: 4px;
   height: 100%;
   background-color: var(--accent);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-radius: 4px 0 0 4px;
 }
 
 .main {
@@ -125,7 +117,6 @@ body {
   font-size: 28px;
   font-weight: 600;
   color: var(--text-color);
-  margin: 0;
 }
 
 .filters {
@@ -162,7 +153,6 @@ body {
 
 .arrow {
   font-size: 10px;
-  margin-left: 4px;
 }
 
 .cards-container {
@@ -179,6 +169,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border: 1px solid var(--border-color);
 }
 
 .card-header {
@@ -198,9 +189,18 @@ body {
   font-weight: bold;
 }
 
-.status['Активный'] { background: #d1fae5; color: #065f46; }
-.status['Завершён'] { background: #e5e7eb; color: #374151; }
-.status['На паузе'] { background: #fef3c7; color: #92400e; }
+.status-active {
+  background: #d1fae5;
+  color: #065f46;
+}
+.status-complete {
+  background: #e5e7eb;
+  color: #374151;
+}
+.status-paused {
+  background: #fef3c7;
+  color: #92400e;
+}
 
 .progress {
   background: #e5e7eb;
@@ -210,7 +210,7 @@ body {
 }
 
 .bar {
-  background-color: #4f46e5;
+  background-color: var(--accent);
   height: 100%;
 }
 
@@ -308,6 +308,7 @@ body {
   background: var(--input-bg);
   color: var(--text-color);
 }
+
 .theme-dark-lct .main {
   background: linear-gradient(135deg, #1e003e, #b71c8d); /* фиолетово-розовый */
   color: white;

@@ -4,7 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Строительные объекты</title>
+
+  <!-- Шрифт Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Основной CSS -->
   <link rel="stylesheet" href="objects.css" />
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f7f9fc;
+      color: #1e2a3a;
+    }
+
+    .sidebar {
+      background-color: #1e2a3a;
+    }
+
+    .sidebar li.active::before {
+      background-color: #1e88e5;
+    }
+
+    .btn, .filters button {
+      background-color: #1e88e5;
+      color: #fff;
+      border: none;
+    }
+
+    .btn:hover, .filters button:hover {
+      background-color: #1565c0;
+    }
+
+    .header h1 {
+      color: #1e2a3a;
+    }
+  </style>
 </head>
 <body>
   <div class="app-container">

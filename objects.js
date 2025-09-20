@@ -96,6 +96,35 @@ const objects = [
     }
   });
 
+function applyFilters() {
+  const text = document.getElementById('searchInput').value.toLowerCase();
+  const district = document.getElementById('districtFilter').value;
+  const type = document.getElementById('typeFilter').value;
+  const date = document.getElementById('dateFilter').value;
+  const fio = document.getElementById('fioFilter').value.toLowerCase();
+  const violations = document.getElementById('violationFilter').value;
+
+  const filtered = objects.filter(obj => {
+    return (
+      obj.title.toLowerCase().includes(text) &&
+      (district === '' || obj.district === district) &&
+      (type === '' || obj.title.includes(type)) &&
+      (date === '' || obj.dates.includes(date)) &&
+      (fio === '' || obj.fio.toLowerCase().includes(fio)) &&
+      (violations === '' || obj.violations.startsWith(violations))
+    );
+  });
+
+  renderCards(filtered);
+}
+
+// Навешиваем обработчики на все фильтры
+['searchInput', 'districtFilter', 'typeFilter', 'dateFilter', 'fioFilter', 'violationFilter'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', applyFilters);
+});
+
+  
   // === Переключение темы ===
   const themeToggle = document.getElementById('themeToggle');
 

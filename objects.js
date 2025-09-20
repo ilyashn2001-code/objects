@@ -164,7 +164,8 @@ const ganttData = [
 ];
 
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
-google.charts.load('current', { packages:['gantt'] });
+// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
 
 function drawGantt() {
   const data = new google.visualization.DataTable();
@@ -176,15 +177,14 @@ function drawGantt() {
   data.addColumn('number', 'Duration');
   data.addColumn('number', 'Percent Complete');
   data.addColumn('string', 'Dependencies');
-  data.addColumn({ type: 'string', role: 'tooltip' }); // 👈 тултип
+  data.addColumn({ type: 'string', role: 'tooltip' });
 
-  // Добавляем задачи с тултипами
   ganttData.forEach(row => {
     const [id, task, resource, start, end, duration, percent, dep] = row;
 
     const tooltip = `
       <b>${task}</b><br>
-      📅 ${start.toLocaleDateString()} — ${end.toLocaleDateString()}<br>
+      📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br>
       ⏳ Выполнение: ${percent}%
     `;
 
@@ -194,21 +194,25 @@ function drawGantt() {
   const options = {
     height: ganttData.length * 50,
     gantt: { trackHeight: 40 },
-    tooltip: { isHtml: true } // 👈 включаем HTML в тултипе
+    tooltip: { isHtml: true }
   };
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
+
+  google.visualization.events.addListener(chart, 'ready', localizeGantt);
+
   chart.draw(data, options);
 }
 
+// === Локализация заголовков ===
 function localizeGantt() {
-  document.querySelectorAll('text').forEach(el => {
+  document.querySelectorAll('#gantChart text').forEach(el => {
     if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
     if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
     if (el.textContent === 'Resource') el.textContent = 'Ресурс';
   });
 }
-  
+
 // === Обработка кнопки "Ганта" ===
 document.addEventListener('click', function (e) {
   if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
@@ -227,6 +231,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
 
 
   

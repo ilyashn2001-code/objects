@@ -173,24 +173,21 @@ const ganttData = [
 
 
 
-// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+  // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
 google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
-
+  
 function drawGantt() {
   const data = new google.visualization.DataTable();
-
-  // колонки
   data.addColumn('string', 'Task ID');
   data.addColumn('string', 'Task Name');
   data.addColumn('string', 'Resource');
-  data.addColumn('date',   'Start Date');
-  data.addColumn('date',   'End Date');
+  data.addColumn('date', 'Start Date');
+  data.addColumn('date', 'End Date');
   data.addColumn('number', 'Duration');
   data.addColumn('number', 'Percent Complete');
   data.addColumn('string', 'Dependencies');
   data.addColumn({ type: 'string', role: 'tooltip' });
 
-  // данные
   ganttData.forEach(row => {
     const [id, task, resource, start, end, duration, percent, dep] = row;
 
@@ -203,7 +200,6 @@ function drawGantt() {
     data.addRow([id, task, resource, start, end, duration, percent, dep, tooltip]);
   });
 
-  // опции
   const options = {
     height: ganttData.length * 50,
     gantt: { trackHeight: 40 },
@@ -212,7 +208,10 @@ function drawGantt() {
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
 
-  google.visualization.events.addListener(chart, 'ready', localizeGantt);
+  google.visualization.events.addListener(chart, 'ready', () => {
+    localizeGantt();
+    straightenArrows(); // 👈 делаем стрелки под 90 градусов
+  });
 
   chart.draw(data, options);
 }
@@ -220,16 +219,42 @@ function drawGantt() {
 // === Локализация заголовков ===
 function localizeGantt() {
   document.querySelectorAll('#gantChart text').forEach(el => {
-    if (el.textContent === 'Duration')     el.textContent = 'Продолжительность';
+    if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
     if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
-    if (el.textContent === 'Resource')     el.textContent = 'Ресурс';
+    if (el.textContent === 'Resource') el.textContent = 'Ресурс';
+  });
+}
+
+// === Перерисовка стрелок (угловые линии) ===
+function straightenArrows() {
+  const svg = document.querySelector('#gantChart svg');
+  if (!svg) return;
+
+  svg.querySelectorAll('path').forEach(p => {
+    const d = p.getAttribute('d');
+    if (!d) return;
+
+    // ищем кривые линии (Bezier "C")
+    if (d.includes('C')) {
+      const coords = d.match(/M([\d.]+),([\d.]+).* ([\d.]+),([\d.]+)/);
+      if (coords) {
+        const x1 = parseFloat(coords[1]);
+        const y1 = parseFloat(coords[2]);
+        const x2 = parseFloat(coords[3]);
+        const y2 = parseFloat(coords[4]);
+
+        // строим прямую с углом: вправо → вниз
+        const newD = `M${x1},${y1} L${x2},${y1} L${x2},${y2}`;
+        p.setAttribute('d', newD);
+      }
+    }
   });
 }
 
 // === Обработка кнопки "Ганта" ===
 document.addEventListener('click', function (e) {
   if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
-    const card  = e.target.closest('.object-card');
+    const card = e.target.closest('.object-card');
     const title = card.querySelector('h3').textContent;
 
     if (title.includes('Путевой пр. 38')) {
@@ -244,6 +269,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
 
 
 

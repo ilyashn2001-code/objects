@@ -367,3 +367,9 @@ body {
   flex: 0 0 160px;
   max-width: 160px;
 }
+/* Белые плейсхолдеры для конкретных фильтров */
+#dateFilter::placeholder,
+#fioFilter::placeholder,
+#violationFilter::placeholder {
+  color: white;
+}

@@ -163,11 +163,10 @@ const ganttData = [
   ['7', 'Сдача объекта', 'Работы', new Date(2024,6,26), new Date(2024,6,30), null, 0, '6']
 ];
 
-// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
 // === ГАНТ: загрузка с русским языком ===
-google.charts.load('current', { packages:['gantt'], language: 'ru' }); // ось времени и локаль — по-русски
+google.charts.load('current', { packages:['gantt'], language: 'ru' });
 
-// Цвета из твоих CSS-переменных (fallback на значения)
+// Цвета (сделано/осталось)
 function getThemeColor(varName, fallback) {
   const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
   return v || fallback;
@@ -175,23 +174,27 @@ function getThemeColor(varName, fallback) {
 const DONE_COLOR   = getThemeColor('--accent', '#1e88e5');   // голубой "сделано"
 const REMAIN_COLOR = getThemeColor('--border-color', '#ccc'); // серый "осталось"
 
-// === Основная отрисовка ===
 function drawGantt() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Task ID');
   data.addColumn('string', 'Task Name');
-  data.addColumn('string', 'Resource');             // оставляем колонку (нужна для структуры)
-  data.addColumn('date',   'Start Date');
-  data.addColumn('date',   'End Date');
+  data.addColumn('string', 'Resource');
+  data.addColumn('date', 'Start Date');
+  data.addColumn('date', 'End Date');
   data.addColumn('number', 'Duration');
   data.addColumn('number', 'Percent Complete');
   data.addColumn('string', 'Dependencies');
-  data.addColumn({ type: 'string', role: 'tooltip' }); // HTML-тултип
+  data.addColumn({ type: 'string', role: 'tooltip' });
 
-  // Данные берём из твоего массива ganttData (он уже есть у тебя)
   ganttData.forEach(row => {
     const [id, task, resource, start, end, duration, percent, dep] = row;
-    const tip = `<b>${task}</b><br>📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br>⏳ Выполнение: ${percent}%`;
+
+    const tip = `
+      <b>${task}</b><br>
+      📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br>
+      ⏳ Выполнение: ${percent}%
+    `;
+
     data.addRow([id, task, resource, start, end, duration, percent, dep, tip]);
   });
 
@@ -200,88 +203,57 @@ function drawGantt() {
     gantt: {
       trackHeight: 40,
       percentEnabled: true,
-      // цвет заполненной части задаём опцией (остальное перекрасим вручную)
-      percentStyle: { fill: DONE_COLOR } // офиц. опция Google Gantt для цвета прогресса :contentReference[oaicite:0]{index=0}
+      percentStyle: { fill: DONE_COLOR } // цвет "сделано"
     },
     tooltip: { isHtml: true }
   };
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
 
-  // После полной отрисовки: локализуем подписи, красим бары и ставим проценты
   google.visualization.events.addListener(chart, 'ready', () => {
     localizeGanttHeaders();
-    colorizeAndLabelBars();
+    recolorRemainingBars();
   });
 
   chart.draw(data, options);
 }
 
-// === Локализация заголовков Duration/Percent Done/Resource ===
+// === Локализация заголовков ===
 function localizeGanttHeaders() {
   document.querySelectorAll('#gantChart text').forEach(el => {
-    if (el.textContent === 'Duration')     el.textContent = 'Продолжительность';
+    if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
     if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
-    if (el.textContent === 'Resource')     el.textContent = 'Ресурс';
+    if (el.textContent === 'Resource') el.textContent = 'Ресурс';
   });
 }
 
-// === Раскраска "сделано/осталось" и подписи процентов прямо на синей части ===
-function colorizeAndLabelBars() {
+// === Перекрашиваем "осталось" в серый ===
+function recolorRemainingBars() {
   const svg = document.querySelector('#gantChart svg');
   if (!svg) return;
 
-  // соберём только "толстые" прямоугольники (сами бары задач)
   const rects = Array.from(svg.querySelectorAll('rect'))
     .filter(r => {
       try { return r.getBBox().height >= 12; } catch(e) { return false; }
     });
 
-  // группируем по Y (каждая строка задачи имеет уникальный Y)
+  // для каждой строки задачи: самый широкий прямоугольник = "осталось"
   const rows = {};
   rects.forEach(r => {
     const bb = r.getBBox();
     const yKey = Math.round(bb.y);
-    (rows[yKey] ||= []).push({ rect: r, bb });
+    (rows[yKey] ||= []).push({ rect: r, width: bb.width });
   });
 
-  const yKeys = Object.keys(rows).sort((a,b)=>a-b);
-
-  yKeys.forEach((yKey, i) => {
-    const bars = rows[yKey];
-
-    // widest = полный бар (осталось), narrower = прогресс
-    bars.sort((a,b) => b.bb.width - a.bb.width);
-    const base     = bars[0];                                    // самый широкий
-    const progress = bars.find(b => b.bb.width < base.bb.width)  // прогресс
-                      || bars[0]; // на случай 100%/0%
-
-    // принудительно задаём цвета
-    base.rect.setAttribute('fill', REMAIN_COLOR);
-    progress.rect.setAttribute('fill', DONE_COLOR);
-
-    // подпись процента
-    const percent = (ganttData[i] && typeof ganttData[i][6] === 'number') ? ganttData[i][6] : null;
-    if (percent === null) return;
-
-    // позиция текста: внутри синей части, если она >= 24px, иначе — сразу справа
-    const inside = progress.bb.width >= 24;
-    const x = inside ? (progress.bb.x + progress.bb.width / 2) : (progress.bb.x + progress.bb.width + 6);
-    const y = progress.bb.y + progress.bb.height / 2 + 4;
-
-    const label = document.createElementNS(svg.namespaceURI, 'text');
-    label.setAttribute('x', x);
-    label.setAttribute('y', y);
-    label.setAttribute('text-anchor', inside ? 'middle' : 'start');
-    label.setAttribute('font-size', '12');
-    label.setAttribute('font-weight', '600');
-    label.setAttribute('fill', inside ? '#fff' : '#1e2a3a');
-    label.textContent = `${percent}%`;
-    svg.appendChild(label);
+  Object.values(rows).forEach(bars => {
+    if (bars.length > 1) {
+      bars.sort((a,b)=>b.width - a.width);
+      bars[0].rect.setAttribute('fill', REMAIN_COLOR);
+    }
   });
 }
 
-// === Кнопка "Ганта" — только для Путевой пр. 38 ===
+// === Кнопка "Ганта" ===
 document.addEventListener('click', function (e) {
   if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
     const card  = e.target.closest('.object-card');

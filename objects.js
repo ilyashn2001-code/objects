@@ -152,26 +152,61 @@ function applyFilters() {
   if (el) el.addEventListener('input', applyFilters);
 });
 
-  // === Гант-модалка ===
-  const gantModal = document.getElementById('gantModal');
-  const gantClose = document.querySelector('.gant-close');
+// === ДАННЫЕ ДЛЯ ГАНТА (Путевой пр. 38) ===
+const ganttData = [
+  ['1', 'Подготовка площадки', 'Работы', new Date(2024,3,15), new Date(2024,3,25), null, 100, null],
+  ['2', 'Фундамент', 'Работы', new Date(2024,3,26), new Date(2024,4,10), null, 80, '1'],
+  ['3', 'Кладка стен', 'Работы', new Date(2024,4,11), new Date(2024,4,30), null, 60, '2'],
+  ['4', 'Крыша', 'Работы', new Date(2024,5,1), new Date(2024,5,15), null, 40, '3'],
+  ['5', 'Внутренние работы', 'Работы', new Date(2024,5,16), new Date(2024,6,10), null, 20, '4'],
+  ['6', 'Благоустройство', 'Работы', new Date(2024,6,11), new Date(2024,6,25), null, 0, '5'],
+  ['7', 'Сдача объекта', 'Работы', new Date(2024,6,26), new Date(2024,6,30), null, 0, '6']
+];
 
-  document.addEventListener('click', function (e) {
-    if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
-      const card = e.target.closest('.object-card');
-      const title = card.querySelector('h3').textContent;
+// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+google.charts.load('current', { packages:['gantt'] });
 
-      if (title.includes('Путевой пр. 38')) {
-        gantModal.style.display = 'flex';
-      } else {
-        alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');
-      }
+function drawGantt() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Task ID');
+  data.addColumn('string', 'Task Name');
+  data.addColumn('string', 'Resource');
+  data.addColumn('date', 'Start Date');
+  data.addColumn('date', 'End Date');
+  data.addColumn('number', 'Duration');
+  data.addColumn('number', 'Percent Complete');
+  data.addColumn('string', 'Dependencies');
+
+  data.addRows(ganttData);
+
+  const options = {
+    height: ganttData.length * 45,
+    gantt: { trackHeight: 35 }
+  };
+
+  const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
+  chart.draw(data, options);
+}
+
+// === Обработка кнопки "Ганта" ===
+document.addEventListener('click', function (e) {
+  if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
+    const card = e.target.closest('.object-card');
+    const title = card.querySelector('h3').textContent;
+
+    if (title.includes('Путевой пр. 38')) {
+      google.charts.setOnLoadCallback(drawGantt);
+      document.getElementById('gantModal').style.display = 'flex';
+    } else {
+      alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');
     }
+  }
 
-    if (e.target.classList.contains('gant-close')) {
-      gantModal.style.display = 'none';
-    }
-  });
+  if (e.target.classList.contains('gant-close')) {
+    document.getElementById('gantModal').style.display = 'none';
+  }
+});
+
 
   
   // === Переключение темы ===

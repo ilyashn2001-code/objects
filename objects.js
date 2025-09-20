@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
   const objects = [
-    { title: 'Строительство школы', status: 'Активный', percent: 70, fio: 'Андреев Ю.', dates: '01.01.2023 – 31.12.2024', district: 'Район 1', budget: '10 млн ₽ / 5.0 млн ₽', violations: '4, проверок: 2', documents: '81%', photos: 17 },
-    { title: 'Офисное здание', status: 'Завершён', percent: 65, fio: 'Васильева А.', dates: '01.01.2023 – 31.12.2024', district: 'Район 1', budget: '11 млн ₽ / 5.3 млн ₽', violations: '2, проверок: 2', documents: '20%', photos: 7 },
-    { title: 'Метро "Юг"', status: 'На паузе', percent: 62, fio: 'Петров Д.', dates: '01.01.2023 – 31.12.2024', district: 'Район 1', budget: '12 млн ₽ / 5.6 млн ₽', violations: '4, проверок: 2', documents: '86%', photos: 6 },
-    { title: 'Парк "Центральный"', status: 'Активный', percent: 54, fio: 'Семенов С.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '13 млн ₽ / 5.9 млн ₽', violations: '3, проверок: 2', documents: '10%', photos: 3 },
-    { title: 'Детский сад №12', status: 'Завершён', percent: 96, fio: 'Иванова Н.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '14 млн ₽ / 6.2 млн ₽', violations: '2, проверок: 1', documents: '58%', photos: 9 },
+    { title: 'Территории, прилегающие к 2 станциям МЦД-3 "Грачёвская" и МЦД-3 "Моссельмаш"', status: 'Активный', percent: 70, fio: 'Андреев Ю.', dates: '05.12.2023-11.11.2025', district: 'САО', violations: '4, проверок: 2', documents: '81%', photos: 17 },
+    { title: 'Дворовая территория по адресу: Петрозаводская ул. 30', status: 'Завершён', percent: 65, fio: 'Васильева А.', dates: '25.08.2025-01.09.2025', district: 'САО', violations: '2, проверок: 2', documents: '20%', photos: 7 },
+    { title: 'Зои Воскресенской улица (Боткинский проезд)', status: 'Завершён', percent: 62, fio: 'Петров Д.', dates: '19.04.2024-09.09.2025', district: 'САО', violations: '4, проверок: 2', documents: '86%', photos: 6 },
+    { title: 'Дворовая территория по адресу: ул. Академика Павлова, д. 46"', status: 'Завершён', percent: 54, fio: 'Семенов С.', dates: '15.04.2025-31.08.2025', district: 'Район 2', budget: '13 млн ₽ / 5.9 млн ₽', violations: '3, проверок: 2', documents: '10%', photos: 3 },
+    { title: 'Детский сад №12', status: 'Завершён', percent: 96, fio: 'Иванова Н.', dates: '01.01.2023 – 31.12.2024', district: 'ЗАО', violations: '2, проверок: 1', documents: '58%', photos: 9 },
     { title: 'Жилой дом, ул. Лесная', status: 'На паузе', percent: 75, fio: 'Титов К.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '15 млн ₽ / 6.5 млн ₽', violations: '3, проверок: 0', documents: '5%', photos: 18 },
     { title: 'Завод "ТехПром"', status: 'Активный', percent: 36, fio: 'Баранов И.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '16 млн ₽ / 6.8 млн ₽', violations: '3, проверок: 2', documents: '20%', photos: 19 },
     { title: 'Торговый центр', status: 'Завершён', percent: 43, fio: 'Егорова В.', dates: '01.01.2023 – 31.12.2024', district: 'Район 3', budget: '17 млн ₽ / 7.1 млн ₽', violations: '1, проверок: 0', documents: '27%', photos: 0 },

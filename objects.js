@@ -163,16 +163,8 @@ const ganttData = [
   ['7', 'Сдача объекта', 'Работы', new Date(2024,6,26), new Date(2024,6,30), null, 0, '6']
 ];
 
-// === ГАНТ: загрузка с русским языком ===
-google.charts.load('current', { packages:['gantt'], language: 'ru' });
-
-// Цвета (сделано/осталось)
-function getThemeColor(varName, fallback) {
-  const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-  return v || fallback;
-}
-const DONE_COLOR   = getThemeColor('--accent', '#1e88e5');   // голубой "сделано"
-const REMAIN_COLOR = getThemeColor('--border-color', '#ccc'); // серый "осталось"
+// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
 
 function drawGantt() {
   const data = new google.visualization.DataTable();
@@ -189,37 +181,30 @@ function drawGantt() {
   ganttData.forEach(row => {
     const [id, task, resource, start, end, duration, percent, dep] = row;
 
-    const tip = `
+    const tooltip = `
       <b>${task}</b><br>
       📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br>
       ⏳ Выполнение: ${percent}%
     `;
 
-    data.addRow([id, task, resource, start, end, duration, percent, dep, tip]);
+    data.addRow([id, task, resource, start, end, duration, percent, dep, tooltip]);
   });
 
   const options = {
     height: ganttData.length * 50,
-    gantt: {
-      trackHeight: 40,
-      percentEnabled: true,
-      percentStyle: { fill: DONE_COLOR } // цвет "сделано"
-    },
+    gantt: { trackHeight: 40 },
     tooltip: { isHtml: true }
   };
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
 
-  google.visualization.events.addListener(chart, 'ready', () => {
-    localizeGanttHeaders();
-    recolorRemainingBars();
-  });
+  google.visualization.events.addListener(chart, 'ready', localizeGantt);
 
   chart.draw(data, options);
 }
 
 // === Локализация заголовков ===
-function localizeGanttHeaders() {
+function localizeGantt() {
   document.querySelectorAll('#gantChart text').forEach(el => {
     if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
     if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
@@ -227,36 +212,10 @@ function localizeGanttHeaders() {
   });
 }
 
-// === Перекрашиваем "осталось" в серый ===
-function recolorRemainingBars() {
-  const svg = document.querySelector('#gantChart svg');
-  if (!svg) return;
-
-  const rects = Array.from(svg.querySelectorAll('rect'))
-    .filter(r => {
-      try { return r.getBBox().height >= 12; } catch(e) { return false; }
-    });
-
-  // для каждой строки задачи: самый широкий прямоугольник = "осталось"
-  const rows = {};
-  rects.forEach(r => {
-    const bb = r.getBBox();
-    const yKey = Math.round(bb.y);
-    (rows[yKey] ||= []).push({ rect: r, width: bb.width });
-  });
-
-  Object.values(rows).forEach(bars => {
-    if (bars.length > 1) {
-      bars.sort((a,b)=>b.width - a.width);
-      bars[0].rect.setAttribute('fill', REMAIN_COLOR);
-    }
-  });
-}
-
-// === Кнопка "Ганта" ===
+// === Обработка кнопки "Ганта" ===
 document.addEventListener('click', function (e) {
   if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
-    const card  = e.target.closest('.object-card');
+    const card = e.target.closest('.object-card');
     const title = card.querySelector('h3').textContent;
 
     if (title.includes('Путевой пр. 38')) {
@@ -271,6 +230,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
 
 
 

@@ -425,3 +425,14 @@ body {
   text-align: left; /* 👈 Выравнивание текста по левому краю */
   padding-left: 16px; /* 👈 Добавим отступ слева для красоты */
 }
+/* === GANT MODAL === */
+#gantModal .chat-box-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#gantModal .chat-box-body {
+  background: var(--card-bg);
+  text-align: center;
+  padding: 20px;
+}

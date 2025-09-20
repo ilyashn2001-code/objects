@@ -373,3 +373,30 @@ body {
 #violationFilter::placeholder {
   color: white;
 }
+
+
+.chat-option {
+  padding: 12px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chat-option:hover {
+  background: var(--accent-hover);
+}
+
+#chatBackBtn {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 14px;
+  padding: 10px 16px;
+  text-align: left;
+  cursor: pointer;
+  margin-top: 10px;
+}

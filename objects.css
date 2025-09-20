@@ -400,3 +400,10 @@ body {
   cursor: pointer;
   margin-top: 10px;
 }
+.chat-select {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+}

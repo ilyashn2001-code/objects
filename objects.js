@@ -152,6 +152,27 @@ function applyFilters() {
   if (el) el.addEventListener('input', applyFilters);
 });
 
+  // === Гант-модалка ===
+  const gantModal = document.getElementById('gantModal');
+  const gantClose = document.querySelector('.gant-close');
+
+  document.addEventListener('click', function (e) {
+    if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
+      const card = e.target.closest('.object-card');
+      const title = card.querySelector('h3').textContent;
+
+      if (title.includes('Путевой пр. 38')) {
+        gantModal.style.display = 'flex';
+      } else {
+        alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');
+      }
+    }
+
+    if (e.target.classList.contains('gant-close')) {
+      gantModal.style.display = 'none';
+    }
+  });
+
   
   // === Переключение темы ===
   const themeToggle = document.getElementById('themeToggle');

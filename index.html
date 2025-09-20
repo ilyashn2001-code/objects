@@ -94,20 +94,32 @@
     </main>
   </div>
 
-  <!-- Модалка чата -->
-  <div id="chatModal" class="chat-modal">
-    <div class="chat-box">
-      <div class="chat-box-header">
-        <h3>Чат по объекту</h3>
-        <span class="chat-close">&times;</span>
-      </div>
-      <div class="chat-box-body">
-        <p>Здесь будет отображаться переписка по объекту.</p>
-      </div>
-      <div class="chat-box-input">
-        <input type="text" placeholder="Введите сообщение..." />
-      </div>
+<div id="chatModal" class="chat-modal">
+  <div class="chat-box">
+    <div class="chat-box-header">
+      <h3 id="chatTitle">Выберите чат</h3>
+      <span class="chat-close">&times;</span>
     </div>
+    
+    <div class="chat-select" id="chatSelect">
+      <button class="chat-option" data-chat="Производство работ">Чат №1 Производство работ</button>
+      <button class="chat-option" data-chat="Входной контроль">Чат №2 Входной контроль</button>
+      <button class="chat-option" data-chat="Лабораторные испытания">Чат №3 Лабораторные испытания</button>
+      <button class="chat-option" data-chat="Фиксация нарушений">Чат №4 Фиксация нарушений</button>
+    </div>
+
+    <div class="chat-box-body" id="chatBody" style="display:none;">
+      <p>Сообщения по выбранному чату будут здесь.</p>
+    </div>
+
+    <div class="chat-box-input" id="chatInput" style="display:none;">
+      <input type="text" placeholder="Введите сообщение..." />
+    </div>
+
+    <button id="chatBackBtn" style="display:none;">← Назад</button>
+  </div>
+</div>
+
   </div>
 </body>
 </html>

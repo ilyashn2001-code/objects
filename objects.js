@@ -166,6 +166,13 @@ const ganttData = [
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
 google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
 
+function getThemeColor(varName, fallback) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  return v || fallback;
+}
+const DONE_COLOR   = getThemeColor('--accent', '#42a5f5');   // голубой "сделано"
+const REMAIN_COLOR = '#1e2a3a';                              // тёмно-синий "осталось"
+  
 function drawGantt() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Task ID');

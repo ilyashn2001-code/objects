@@ -36,31 +36,28 @@ document.addEventListener('DOMContentLoaded', function () {
       card.className = 'object-card';
       const statusClass = getStatusClass(obj.status);
 
-      card.innerHTML = `
-        <div class="card-header">
-          <h3>${obj.title}</h3>
-          <span class="status ${statusClass}">${obj.status}</span>
-        </div>
-        <div class="progress"><div class="bar" style="width: ${obj.percent}%"></div></div>
-        <p class="percent">${obj.percent}%</p>
-        <div class="meta">
-          <span>${obj.fio}</span>
-          <span>${obj.dates}</span>
-          <span>${obj.district}</span>
-          <span>💰 ${obj.budget}</span>
-          <span>⚠ Нарушений: ${obj.violations}</span>
-          <span>📋 Документы: ${obj.documents}</span>
-          <span>📷 ${obj.photos} фото</span>
-        </div>
-        <div class="actions">
-          <button>Подробнее</button>
-          <button>PDF</button>
-          <button class="chat-open-btn">Открыть чат ✏️</button>
-        </div>
-      `;
-      container.appendChild(card);
-    });
-  }
+ card.innerHTML = `
+  <div class="card-header">
+    <h3>${obj.title}</h3>
+    <span class="status ${statusClass}">${obj.status}</span>
+  </div>
+  <div class="progress"><div class="bar" style="width: ${obj.percent}%"></div></div>
+  <p class="percent">${obj.percent}%</p>
+  <div class="meta">
+    <span>${obj.fio}</span>
+    <span>${obj.dates}</span>
+    <span>${obj.district}</span>
+    <span>⚠ Нарушений: ${obj.violations}</span>
+    <span>📋 ИД: ${obj.documents}</span>
+    <span>📷 ${obj.photos} фото</span>
+  </div>
+  <div class="actions">
+    <button>Диаграмма Ганта</button>
+    <button>Документы</button>
+    <button class="chat-open-btn">Открыть чат ✏️</button>
+  </div>
+`;
+
 
   document.getElementById('searchInput').addEventListener('input', function () {
     const val = this.value.toLowerCase();

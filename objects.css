@@ -348,3 +348,10 @@ body {
   color: #e0e0e0;
 }
 
+/* Уменьшенные фильтры */
+#dateFilter,
+#fioFilter,
+#violationFilter {
+  flex: 0 0 160px;
+  max-width: 160px;
+}

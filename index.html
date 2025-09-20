@@ -122,31 +122,21 @@
 
 <!-- Модалка диаграммы Ганта -->
 <div id="gantModal" class="chat-modal">
-  <div class="chat-box">
+  <div class="chat-box" style="width: 1200px; height: 700px;">
     <div class="chat-box-header">
       <h3>Диаграмма Ганта — Путевой пр. 38</h3>
       <span class="chat-close gant-close">&times;</span>
     </div>
-    <div class="chat-box-body" style="overflow-x: auto;">
-      <img src="gant-putevoy.png" alt="Гант диаграмма" style="width: 1000px; max-width: none;">
+    <div class="chat-box-body" style="overflow: auto;">
+      <!-- контейнер под диаграмму -->
+      <div id="gantChart" style="width: 1100px; height: 600px;"></div>
     </div>
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const gantModal = document.getElementById('gantModal');
+<!-- Подключаем Google Charts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('gant-open-btn') && e.target.closest('.object-card').querySelector('h3').innerText.includes('Путевой пр. 38')) {
-        gantModal.style.display = 'flex';
-      }
-      if (e.target.classList.contains('gant-close')) {
-        gantModal.style.display = 'none';
-      }
-    });
-  });
-</script>
 
   </div>
 </body>

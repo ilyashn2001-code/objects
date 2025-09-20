@@ -400,3 +400,11 @@ body {
   cursor: pointer;
   margin-top: 10px;
 }
+
+.chat-select {
+  display: flex;
+  flex-direction: column; /* Кнопки по вертикали */
+  align-items: flex-start; /* Выравнивание по левому краю */
+  gap: 10px; /* Отступы между кнопками */
+  padding: 20px;
+}

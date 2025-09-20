@@ -85,16 +85,44 @@ const objects = [
 
   // === Чат-модалка ===
   const modal = document.getElementById('chatModal');
-  const closeBtn = document.querySelector('.chat-close');
+  const chatTitle = document.getElementById('chatTitle');
+  const chatSelect = document.getElementById('chatSelect');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+  const chatBackBtn = document.getElementById('chatBackBtn');
 
   document.addEventListener('click', function (e) {
     if (e.target.classList.contains('chat-open-btn')) {
       modal.style.display = 'flex';
+      chatTitle.textContent = 'Выберите чат';
+      chatSelect.style.display = 'block';
+      chatBody.style.display = 'none';
+      chatInput.style.display = 'none';
+      chatBackBtn.style.display = 'none';
     }
+
     if (e.target.classList.contains('chat-close')) {
       modal.style.display = 'none';
     }
+
+    if (e.target.classList.contains('chat-option')) {
+      const selected = e.target.dataset.chat;
+      chatTitle.textContent = selected;
+      chatSelect.style.display = 'none';
+      chatBody.style.display = 'block';
+      chatInput.style.display = 'none'; // без поля ввода
+      chatBackBtn.style.display = 'block';
+    }
+
+    if (e.target.id === 'chatBackBtn') {
+      chatTitle.textContent = 'Выберите чат';
+      chatSelect.style.display = 'block';
+      chatBody.style.display = 'none';
+      chatInput.style.display = 'none';
+      chatBackBtn.style.display = 'none';
+    }
   });
+
 
 function applyFilters() {
   const text = document.getElementById('searchInput').value.toLowerCase();

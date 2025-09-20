@@ -59,14 +59,34 @@
         <button id="themeToggle" class="theme-toggle" title="Переключить тему">🌗</button>
       </header>
 
-      <div class="filters">
-        <input type="text" id="searchInput" placeholder="Поиск по названию или адресу" />
-        <button>Район <span class="arrow">▼</span></button>
-        <button>Тип объекта <span class="arrow">▼</span></button>
-        <button>Дата начала/окончания <span class="arrow">▼</span></button>
-        <button>Ответственный <span class="arrow">▼</span></button>
-        <button>Наличие нарушений <span class="arrow">▼</span></button>
-      </div>
+     <div class="filters">
+  <input type="text" id="searchInput" placeholder="Поиск по названию или адресу" />
+
+  <select id="districtFilter">
+    <option value="">Округ</option>
+    <option value="САО">САО</option>
+    <option value="СВАО">СВАО</option>
+    <option value="ЗАО">ЗАО</option>
+    <option value="ВАО">ВАО</option>
+    <option value="ЮВАО">ЮВАО</option>
+    <option value="ЦАО">ЦАО</option>
+    <option value="СЗАО">СЗАО</option>
+    <option value="ЗелАО">ЗелАО</option>
+  </select>
+
+  <select id="typeFilter">
+    <option value="">Тип объекта</option>
+    <option value="Дворовая территория">Дворовая территория</option>
+    <option value="Объект дорожного хозяйства">Объект дорожного хозяйства</option>
+    <option value="Объект комплексного благоустройства">Объект комплексного благоустройства</option>
+    <option value="Объект озеленения">Объект озеленения</option>
+  </select>
+
+  <input type="text" id="dateFilter" placeholder="Дата (2024-08-20)" />
+  <input type="text" id="fioFilter" placeholder="Ответственный" />
+  <input type="text" id="violationFilter" placeholder="Нарушения (число)" />
+</div>
+
 
       <div class="cards-container" id="objectList">
         <!-- Карточки отрисовываются скриптом -->

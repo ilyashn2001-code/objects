@@ -173,11 +173,7 @@ const ganttData = [
 
 
 
-
-
-
-
-  // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
 google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
   
 function drawGantt() {
@@ -236,22 +232,20 @@ function straightenArrows() {
 
   svg.querySelectorAll('path').forEach(p => {
     const d = p.getAttribute('d');
-    if (!d) return;
+    if (!d || !d.includes('C')) return; // только кривые линии
 
-    // ищем кривые линии (Bezier "C")
-    if (d.includes('C')) {
-      const coords = d.match(/M([\d.]+),([\d.]+).* ([\d.]+),([\d.]+)/);
-      if (coords) {
-        const x1 = parseFloat(coords[1]);
-        const y1 = parseFloat(coords[2]);
-        const x2 = parseFloat(coords[3]);
-        const y2 = parseFloat(coords[4]);
+    // Собираем все координаты
+    const points = d.match(/([\d.]+),([\d.]+)/g);
+    if (!points || points.length < 2) return;
 
-        // строим прямую с углом: вправо → вниз
-        const newD = `M${x1},${y1} L${x2},${y1} L${x2},${y2}`;
-        p.setAttribute('d', newD);
-      }
-    }
+    // Первая точка (начало)
+    const [x1, y1] = points[0].split(',').map(Number);
+    // Последняя точка (конец)
+    const [x2, y2] = points[points.length - 1].split(',').map(Number);
+
+    // Ломаная линия: вправо → вниз
+    const newD = `M${x1},${y1} L${x2},${y1} L${x2},${y2}`;
+    p.setAttribute('d', newD);
   });
 }
 
@@ -273,6 +267,11 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
+
+
+
+
 
 
 

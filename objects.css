@@ -325,8 +325,9 @@ body {
   color: var(--text-color);
 }
 
+/* === Кнопочный стиль для фильтров (кроме поиска) === */
 .filters select,
-.filters input {
+.filters input:not(#searchInput) {
   padding: 10px 14px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -334,29 +335,35 @@ body {
   color: white;
   cursor: pointer;
   font-size: 14px;
-  appearance: none; /* Убирает стрелку системную в select */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
 .filters select:hover,
-.filters input:hover {
+.filters input:not(#searchInput):hover {
   background: var(--accent-hover);
 }
 
-.filters input::placeholder {
-  color: #e0e0e0;
+/* Белое поле поиска */
+#searchInput {
+  background: var(--input-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  border-radius: 6px;
+  flex: 1 1 300px;
 }
 
-/* Уменьшенные фильтры */
+/* Placeholder для поиска */
+#searchInput::placeholder {
+  color: #666;
+}
+
+/* Узкие фильтры */
 #dateFilter,
 #fioFilter,
 #violationFilter {
   flex: 0 0 160px;
   max-width: 160px;
-}
-
-#searchInput {
-  background: var(--input-bg) !important;
-  color: var(--text-color) !important;
 }

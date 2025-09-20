@@ -201,6 +201,14 @@ function drawGantt() {
   chart.draw(data, options);
 }
 
+function localizeGantt() {
+  document.querySelectorAll('text').forEach(el => {
+    if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
+    if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
+    if (el.textContent === 'Resource') el.textContent = 'Ресурс';
+  });
+}
+  
 // === Обработка кнопки "Ганта" ===
 document.addEventListener('click', function (e) {
   if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {

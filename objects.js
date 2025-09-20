@@ -1,21 +1,35 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const objects = [
-    { title: 'Территории, прилегающие к 2 станциям МЦД-3 "Грачёвская" и МЦД-3 "Моссельмаш"', status: 'Активный', percent: 70, fio: 'Андреев Ю.', dates: '05.12.2023-11.11.2025', district: 'САО', violations: '4, проверок: 2', documents: '81%', photos: 17 },
-    { title: 'Дворовая территория по адресу: Петрозаводская ул. 30', status: 'Завершён', percent: 65, fio: 'Васильева А.', dates: '25.08.2025-01.09.2025', district: 'САО', violations: '2, проверок: 2', documents: '20%', photos: 7 },
-    { title: 'Зои Воскресенской улица (Боткинский проезд)', status: 'Завершён', percent: 62, fio: 'Петров Д.', dates: '19.04.2024-09.09.2025', district: 'САО', violations: '4, проверок: 2', documents: '86%', photos: 6 },
-    { title: 'Дворовая территория по адресу: ул. Академика Павлова, д. 46"', status: 'Завершён', percent: 54, fio: 'Семенов С.', dates: '15.04.2025-31.08.2025', district: 'Район 2', budget: '13 млн ₽ / 5.9 млн ₽', violations: '3, проверок: 2', documents: '10%', photos: 3 },
-    { title: 'Детский сад №12', status: 'Завершён', percent: 96, fio: 'Иванова Н.', dates: '01.01.2023 – 31.12.2024', district: 'ЗАО', violations: '2, проверок: 1', documents: '58%', photos: 9 },
-    { title: 'Жилой дом, ул. Лесная', status: 'На паузе', percent: 75, fio: 'Титов К.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '15 млн ₽ / 6.5 млн ₽', violations: '3, проверок: 0', documents: '5%', photos: 18 },
-    { title: 'Завод "ТехПром"', status: 'Активный', percent: 36, fio: 'Баранов И.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '16 млн ₽ / 6.8 млн ₽', violations: '3, проверок: 2', documents: '20%', photos: 19 },
-    { title: 'Торговый центр', status: 'Завершён', percent: 43, fio: 'Егорова В.', dates: '01.01.2023 – 31.12.2024', district: 'Район 3', budget: '17 млн ₽ / 7.1 млн ₽', violations: '1, проверок: 0', documents: '27%', photos: 0 },
-    { title: 'Кафе "БургХаус"', status: 'На паузе', percent: 43, fio: 'Романов Д.', dates: '01.01.2023 – 31.12.2024', district: 'Район 3', budget: '9 млн ₽ / 4.1 млн ₽', violations: '0, проверок: 0', documents: '48%', photos: 11 },
-    { title: 'Автосалон Hyundai', status: 'Активный', percent: 56, fio: 'Сорокин И.', dates: '01.01.2023 – 31.12.2024', district: 'Район 3', budget: '11 млн ₽ / 6.2 млн ₽', violations: '2, проверок: 1', documents: '22%', photos: 2 },
-    { title: 'Мечеть "Свет мира"', status: 'Завершён', percent: 23, fio: 'Муслим Х.', dates: '01.01.2023 – 31.12.2024', district: 'Район 3', budget: '13 млн ₽ / 6.8 млн ₽', violations: '2, проверок: 1', documents: '35%', photos: 1 },
-    { title: 'Больница №3', status: 'На паузе', percent: 2, fio: 'Врачев В.', dates: '01.01.2023 – 31.12.2024', district: 'Район 3', budget: '20 млн ₽ / 9.5 млн ₽', violations: '3, проверок: 1', documents: '9%', photos: 12 },
-    { title: 'Салон красоты "Мила"', status: 'Активный', percent: 68, fio: 'Краснова А.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '9 млн ₽ / 3.5 млн ₽', violations: '1, проверок: 1', documents: '77%', photos: 5 },
-    { title: 'Спорткомплекс', status: 'Завершён', percent: 80, fio: 'Данилов А.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '13 млн ₽ / 6.1 млн ₽', violations: '0, проверок: 0', documents: '99%', photos: 6 },
-    { title: 'Почтовое отделение', status: 'На паузе', percent: 11, fio: 'Ковалев Е.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '8 млн ₽ / 2.1 млн ₽', violations: '0, проверок: 1', documents: '15%', photos: 4 }
-  ];
+const objects = [
+  // первые 8
+  { title: 'Дворовая территория по адресу: Путевой пр. 38', status: 'Завершён', percent: 100, fio: 'Андреев Ю.А.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '2, проверок: 1', documents: '85%', photos: 12 },
+  { title: 'Дворовая территория по адресу: Флотская ул. 54, 58 к.1', status: 'Завершён', percent: 100, fio: 'Семенов И.П.', dates: '15.04.2024-15.08.2024', district: 'САО', violations: '1, проверок: 1', documents: '90%', photos: 8 },
+  { title: 'Дворовая территория по адресу: Каргопольская ул. 18', status: 'Завершён', percent: 100, fio: 'Петров Д.С.', dates: '15.04.2024-28.08.2024', district: 'СВАО', violations: '3, проверок: 2', documents: '75%', photos: 10 },
+  { title: 'Дворовая территория по адресу: Бестужевых ул. 27А', status: 'Завершён', percent: 100, fio: 'Иванова Н.А.', dates: '15.04.2024-23.08.2024', district: 'СВАО', violations: '0, проверок: 1', documents: '88%', photos: 6 },
+  { title: 'Дворовая территория по адресу: Челобитьевское шоссе 14 к.3, 14 к.4, 14 к.5', status: 'Завершён', percent: 100, fio: 'Кузнецов А.В.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '2, проверок: 2', documents: '82%', photos: 11 },
+  { title: 'Дворовая территория по адресу: Путевой пр. 38', status: 'Завершён', percent: 100, fio: 'Орлова Е.И.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '1, проверок: 0', documents: '95%', photos: 7 },
+  { title: 'Дворовая территория по адресу: Мира просп. 194', status: 'Завершён', percent: 100, fio: 'Фёдоров М.Г.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '0, проверок: 1', documents: '97%', photos: 9 },
+  { title: 'Некрасовка', status: 'Завершён', percent: 100, fio: 'Сидорова Л.П.', dates: '03.05.2024-30.09.2024', district: 'ЮВАО', violations: '2, проверок: 1', documents: '80%', photos: 13 },
+
+  // следующие 17
+  { title: 'Территории, прилегающие к 2 станциям МЦД-3 "Грачёвская" и МЦД-3 "Моссельмаш"', status: 'Активный', percent: 85, fio: 'Андреев Ю.А.', dates: '05.12.2023-11.11.2025', district: 'САО', violations: '4, проверок: 2', documents: '81%', photos: 17 },
+  { title: 'Дворовая территория по адресу: Петрозаводская ул. 30', status: 'Завершён', percent: 100, fio: 'Васильева А.К.', dates: '25.08.2025-01.09.2025', district: 'САО', violations: '2, проверок: 2', documents: '70%', photos: 7 },
+  { title: 'Зои Воскресенской улица (Боткинский проезд)', status: 'Активный', percent: 70, fio: 'Петров Д.С.', dates: '19.04.2024-09.09.2025', district: 'САО', violations: '3, проверок: 2', documents: '60%', photos: 6 },
+  { title: 'Дворовая территория по адресу: ул. Академика Павлова, д. 46', status: 'Завершён', percent: 100, fio: 'Семенов С.В.', dates: '15.04.2025-31.08.2025', district: 'ЗАО', violations: '1, проверок: 1', documents: '50%', photos: 3 },
+  { title: 'Дворовая территория по адресу: Черкизовская М. ул. 64', status: 'Завершён', percent: 100, fio: 'Иванова Т.А.', dates: '13.03.2025-25.08.2025', district: 'ВАО', violations: '0, проверок: 2', documents: '78%', photos: 5 },
+  { title: 'Дворовая территория по адресу: Мироновская ул. 46, 46 к.1', status: 'Завершён', percent: 100, fio: 'Орлов Н.Б.', dates: '01.09.2024-25.08.2025', district: 'ВАО', violations: '1, проверок: 1', documents: '65%', photos: 4 },
+  { title: 'Дворовая территория по адресу: Новокосинская ул. 11 к.1, 11 к.2', status: 'Завершён', percent: 100, fio: 'Фёдоров В.К.', dates: '20.04.2024-25.08.2025', district: 'ВАО', violations: '2, проверок: 2', documents: '55%', photos: 9 },
+  { title: '2-й Краснокурсантский проезд', status: 'Завершён', percent: 100, fio: 'Сидоров П.М.', dates: '19.04.2024-06.08.2025', district: 'ЮВАО', violations: '0, проверок: 1', documents: '72%', photos: 10 },
+  { title: 'Территория ГБОУ Школа № 1474 по адресу: ул. Клинская, д. 24', status: 'Завершён', percent: 100, fio: 'Андреева И.В.', dates: '01.04.2025-21.08.2025', district: 'САО', violations: '1, проверок: 1', documents: '67%', photos: 12 },
+  { title: 'Территория ГБОУ Школа в Капотне по адресу: 5-ый Квартал Капотни, д. 28', status: 'Завершён', percent: 100, fio: 'Кузнецова Л.А.', dates: '01.04.2025-21.08.2025', district: 'ЮВАО', violations: '0, проверок: 2', documents: '69%', photos: 7 },
+  { title: 'Территория ГБОУ Школа № 1128 по адресу: Зеленоград, корп. 1128', status: 'Завершён', percent: 100, fio: 'Морозов Р.Д.', dates: '01.04.2025-21.08.2025', district: 'ЗелАО', violations: '0, проверок: 1', documents: '80%', photos: 5 },
+  { title: 'Территория ГБОУ Школа № 1501 по адресу: ул. Тихвинская, д. 39, стр. 2', status: 'Завершён', percent: 100, fio: 'Борисова Ю.М.', dates: '01.04.2025-20.08.2025', district: 'ЦАО', violations: '1, проверок: 1', documents: '77%', photos: 6 },
+  { title: 'Территория ГБОУ Школа № 1324 по адресу: пр-кт Федеративный, д. 27', status: 'Завершён', percent: 100, fio: 'Смирнов О.В.', dates: '01.04.2025-11.08.2025', district: 'ВАО', violations: '2, проверок: 1', documents: '73%', photos: 8 },
+  { title: '10-летия Октября ул.', status: 'Завершён', percent: 100, fio: 'Соколова Е.А.', dates: '19.04.2024-15.12.2024', district: 'ЦАО', violations: '0, проверок: 1', documents: '91%', photos: 9 },
+  { title: '1-й Амбулаторный проезд', status: 'Завершён', percent: 100, fio: 'Григорьев С.П.', dates: '19.04.2024-15.12.2024', district: 'САО', violations: '1, проверок: 0', documents: '84%', photos: 10 },
+  { title: '1-й Вешняковский проезд', status: 'Завершён', percent: 100, fio: 'Николаева Т.А.', dates: '19.04.2024-15.12.2024', district: 'ЮВАО', violations: '0, проверок: 1', documents: '76%', photos: 11 },
+  { title: '2-й Пехотный переулок', status: 'Завершён', percent: 100, fio: 'Егоров И.К.', dates: '19.04.2024-15.12.2024', district: 'СЗАО', violations: '1, проверок: 1', documents: '83%', photos: 7 }
+];
+
 
    function getStatusClass(status) {
     switch (status) {

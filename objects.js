@@ -176,12 +176,25 @@ function drawGantt() {
   data.addColumn('number', 'Duration');
   data.addColumn('number', 'Percent Complete');
   data.addColumn('string', 'Dependencies');
+  data.addColumn({ type: 'string', role: 'tooltip' }); // 👈 тултип
 
-  data.addRows(ganttData);
+  // Добавляем задачи с тултипами
+  ganttData.forEach(row => {
+    const [id, task, resource, start, end, duration, percent, dep] = row;
+
+    const tooltip = `
+      <b>${task}</b><br>
+      📅 ${start.toLocaleDateString()} — ${end.toLocaleDateString()}<br>
+      ⏳ Выполнение: ${percent}%
+    `;
+
+    data.addRow([id, task, resource, start, end, duration, percent, dep, tooltip]);
+  });
 
   const options = {
-    height: ganttData.length * 45,
-    gantt: { trackHeight: 35 }
+    height: ganttData.length * 50,
+    gantt: { trackHeight: 40 },
+    tooltip: { isHtml: true } // 👈 включаем HTML в тултипе
   };
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));

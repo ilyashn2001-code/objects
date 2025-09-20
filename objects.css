@@ -324,3 +324,27 @@ body {
   background: var(--input-bg);
   color: var(--text-color);
 }
+
+.filters select,
+.filters input {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  appearance: none; /* Убирает стрелку системную в select */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.filters select:hover,
+.filters input:hover {
+  background: var(--accent-hover);
+}
+
+.filters input::placeholder {
+  color: #e0e0e0;
+}
+

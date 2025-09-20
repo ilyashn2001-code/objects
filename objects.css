@@ -403,10 +403,10 @@ body {
 
 .chat-select {
   display: flex;
-  flex-wrap: nowrap;          /* ❗ В один ряд */
-  justify-content: flex-start;/* ❗ Выравнивание слева */
-  gap: 10px;                  /* Расстояние между кнопками */
+  flex-direction: column; /* <-- вертикальное расположение */
+  align-items: flex-start; /* выравнивание по левому краю */
+  gap: 10px;               /* расстояние между кнопками */
   padding: 20px;
-  overflow-x: auto;           /* ❗ Горизонтальная прокрутка, если не помещаются */
 }
+
 

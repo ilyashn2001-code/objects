@@ -401,12 +401,3 @@ body {
   margin-top: 10px;
 }
 
-.chat-select {
-  display: flex;
-  flex-direction: column; /* <-- вертикальное расположение */
-  align-items: flex-start; /* выравнивание по левому краю */
-  gap: 10px;               /* расстояние между кнопками */
-  padding: 20px;
-}
-
-

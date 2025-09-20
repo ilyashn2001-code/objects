@@ -164,8 +164,7 @@ const ganttData = [
 ];
 
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
-// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
-google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
+google.charts.load('current', { packages:['gantt'], language: 'ru' });
 
 function drawGantt() {
   const data = new google.visualization.DataTable();
@@ -199,7 +198,11 @@ function drawGantt() {
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
 
-  google.visualization.events.addListener(chart, 'ready', localizeGantt);
+  // Событие после рендера
+  google.visualization.events.addListener(chart, 'ready', () => {
+    localizeGantt();
+    addPercentLabels();
+  });
 
   chart.draw(data, options);
 }
@@ -210,6 +213,30 @@ function localizeGantt() {
     if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
     if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
     if (el.textContent === 'Resource') el.textContent = 'Ресурс';
+  });
+}
+
+// === Добавление процентов на плашки ===
+function addPercentLabels() {
+  const bars = document.querySelectorAll('#gantChart rect');
+  const svg = document.querySelector('#gantChart svg');
+
+  ganttData.forEach((row, i) => {
+    const percent = row[6]; // % выполнения
+    const barIndex = i * 2; // у Google 2 прямоугольника на задачу: фон + прогресс
+
+    if (bars[barIndex + 1]) {
+      const bar = bars[barIndex + 1].getBBox();
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', bar.x + bar.width / 2);
+      text.setAttribute('y', bar.y + bar.height / 2 + 4);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-size', '12');
+      text.setAttribute('fill', 'white');
+      text.textContent = percent + '%';
+      svg.appendChild(text);
+    }
   });
 }
 
@@ -231,6 +258,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
 
 
 

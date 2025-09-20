@@ -173,7 +173,77 @@ const ganttData = [
 
 
 
-// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА === google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский function drawGantt() { const data = new google.visualization.DataTable(); data.addColumn('string', 'Task ID'); data.addColumn('string', 'Task Name'); data.addColumn('string', 'Resource'); data.addColumn('date', 'Start Date'); data.addColumn('date', 'End Date'); data.addColumn('number', 'Duration'); data.addColumn('number', 'Percent Complete'); data.addColumn('string', 'Dependencies'); data.addColumn({ type: 'string', role: 'tooltip' }); ganttData.forEach(row => { const [id, task, resource, start, end, duration, percent, dep] = row; const tooltip = <b>${task}</b><br> 📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br> ⏳ Выполнение: ${percent}% ; data.addRow([id, task, resource, start, end, duration, percent, dep, tooltip]); }); const options = { height: ganttData.length * 50, gantt: { trackHeight: 40 }, tooltip: { isHtml: true } }; const chart = new google.visualization.Gantt(document.getElementById('gantChart')); google.visualization.events.addListener(chart, 'ready', localizeGantt); chart.draw(data, options); } // === Локализация заголовков === function localizeGantt() { document.querySelectorAll('#gantChart text').forEach(el => { if (el.textContent === 'Duration') el.textContent = 'Продолжительность'; if (el.textContent === 'Percent Done') el.textContent = 'Выполнение'; if (el.textContent === 'Resource') el.textContent = 'Ресурс'; }); } // === Обработка кнопки "Ганта" === document.addEventListener('click', function (e) { if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') { const card = e.target.closest('.object-card'); const title = card.querySelector('h3').textContent; if (title.includes('Путевой пр. 38')) { google.charts.setOnLoadCallback(drawGantt); document.getElementById('gantModal').style.display = 'flex'; } else { alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38'); } } if (e.target.classList.contains('gant-close')) { document.getElementById('gantModal').style.display = 'none'; } });
+// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
+
+function drawGantt() {
+  const data = new google.visualization.DataTable();
+
+  // колонки
+  data.addColumn('string', 'Task ID');
+  data.addColumn('string', 'Task Name');
+  data.addColumn('string', 'Resource');
+  data.addColumn('date',   'Start Date');
+  data.addColumn('date',   'End Date');
+  data.addColumn('number', 'Duration');
+  data.addColumn('number', 'Percent Complete');
+  data.addColumn('string', 'Dependencies');
+  data.addColumn({ type: 'string', role: 'tooltip' });
+
+  // данные
+  ganttData.forEach(row => {
+    const [id, task, resource, start, end, duration, percent, dep] = row;
+
+    const tooltip = `
+      <b>${task}</b><br>
+      📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br>
+      ⏳ Выполнение: ${percent}%
+    `;
+
+    data.addRow([id, task, resource, start, end, duration, percent, dep, tooltip]);
+  });
+
+  // опции
+  const options = {
+    height: ganttData.length * 50,
+    gantt: { trackHeight: 40 },
+    tooltip: { isHtml: true }
+  };
+
+  const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
+
+  google.visualization.events.addListener(chart, 'ready', localizeGantt);
+
+  chart.draw(data, options);
+}
+
+// === Локализация заголовков ===
+function localizeGantt() {
+  document.querySelectorAll('#gantChart text').forEach(el => {
+    if (el.textContent === 'Duration')     el.textContent = 'Продолжительность';
+    if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
+    if (el.textContent === 'Resource')     el.textContent = 'Ресурс';
+  });
+}
+
+// === Обработка кнопки "Ганта" ===
+document.addEventListener('click', function (e) {
+  if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Ганта') {
+    const card  = e.target.closest('.object-card');
+    const title = card.querySelector('h3').textContent;
+
+    if (title.includes('Путевой пр. 38')) {
+      google.charts.setOnLoadCallback(drawGantt);
+      document.getElementById('gantModal').style.display = 'flex';
+    } else {
+      alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');
+    }
+  }
+
+  if (e.target.classList.contains('gant-close')) {
+    document.getElementById('gantModal').style.display = 'none';
+  }
+});
 
 
 

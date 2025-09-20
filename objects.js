@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     { title: 'Почтовое отделение', status: 'На паузе', percent: 11, fio: 'Ковалев Е.', dates: '01.01.2023 – 31.12.2024', district: 'Район 2', budget: '8 млн ₽ / 2.1 млн ₽', violations: '0, проверок: 1', documents: '15%', photos: 4 }
   ];
 
-  function getStatusClass(status) {
+   function getStatusClass(status) {
     switch (status) {
       case 'Активный': return 'status-active';
       case 'Завершён': return 'status-complete';
@@ -36,28 +36,30 @@ document.addEventListener('DOMContentLoaded', function () {
       card.className = 'object-card';
       const statusClass = getStatusClass(obj.status);
 
- card.innerHTML = `
-  <div class="card-header">
-    <h3>${obj.title}</h3>
-    <span class="status ${statusClass}">${obj.status}</span>
-  </div>
-  <div class="progress"><div class="bar" style="width: ${obj.percent}%"></div></div>
-  <p class="percent">${obj.percent}%</p>
-  <div class="meta">
-    <span>${obj.fio}</span>
-    <span>${obj.dates}</span>
-    <span>${obj.district}</span>
-    <span>⚠ Нарушений: ${obj.violations}</span>
-    <span>📋 ИД: ${obj.documents}</span>
-    <span>📷 ${obj.photos} фото</span>
-  </div>
-  <div class="actions">
-    <button>Диаграмма Ганта</button>
-    <button>Документы</button>
-    <button class="chat-open-btn">Открыть чат ✏️</button>
-  </div>
-`;
-
+      card.innerHTML = `
+        <div class="card-header">
+          <h3>${obj.title}</h3>
+          <span class="status ${statusClass}">${obj.status}</span>
+        </div>
+        <div class="progress"><div class="bar" style="width: ${obj.percent}%"></div></div>
+        <p class="percent">${obj.percent}%</p>
+        <div class="meta">
+          <span>${obj.fio}</span>
+          <span>${obj.dates}</span>
+          <span>${obj.district}</span>
+          <span>⚠ Нарушений: ${obj.violations}</span>
+          <span>📋 ИД: ${obj.documents}</span>
+          <span>📷 ${obj.photos} фото</span>
+        </div>
+        <div class="actions">
+          <button>Диаграмма Ганта</button>
+          <button>Документы</button>
+          <button class="chat-open-btn">Открыть чат ✏️</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
 
   document.getElementById('searchInput').addEventListener('input', function () {
     const val = this.value.toLowerCase();
@@ -90,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', next);
   });
 
-  // Устанавливаем тему при загрузке
   const savedTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 });

@@ -163,7 +163,21 @@ const ganttData = [
   ['7', 'Сдача объекта', 'Работы', new Date(2024,6,26), new Date(2024,6,30), null, 0, '6']
 ];
 
-// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
 google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
   
 function drawGantt() {
@@ -198,7 +212,10 @@ function drawGantt() {
 
   const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
 
-  google.visualization.events.addListener(chart, 'ready', localizeGantt);
+  google.visualization.events.addListener(chart, 'ready', () => {
+    localizeGantt();
+    straightenArrows(); // 👈 делаем стрелки под 90 градусов
+  });
 
   chart.draw(data, options);
 }
@@ -209,6 +226,32 @@ function localizeGantt() {
     if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
     if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
     if (el.textContent === 'Resource') el.textContent = 'Ресурс';
+  });
+}
+
+// === Перерисовка стрелок (угловые линии) ===
+function straightenArrows() {
+  const svg = document.querySelector('#gantChart svg');
+  if (!svg) return;
+
+  svg.querySelectorAll('path').forEach(p => {
+    const d = p.getAttribute('d');
+    if (!d) return;
+
+    // ищем кривые линии (Bezier "C")
+    if (d.includes('C')) {
+      const coords = d.match(/M([\d.]+),([\d.]+).* ([\d.]+),([\d.]+)/);
+      if (coords) {
+        const x1 = parseFloat(coords[1]);
+        const y1 = parseFloat(coords[2]);
+        const x2 = parseFloat(coords[3]);
+        const y2 = parseFloat(coords[4]);
+
+        // строим прямую с углом: вправо → вниз
+        const newD = `M${x1},${y1} L${x2},${y1} L${x2},${y2}`;
+        p.setAttribute('d', newD);
+      }
+    }
   });
 }
 
@@ -235,6 +278,9 @@ document.addEventListener('click', function (e) {
 
 
 
+
+
+  
 
   
   // === Переключение темы ===

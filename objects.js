@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <span>📷 ${obj.photos} фото</span>
         </div>
         <div class="actions">
-          <button>Диаграмма Ганта</button>
+          <button>Ганта</button>
           <button>Документы</button>
           <button class="chat-open-btn">Открыть чат ✏️</button>
         </div>

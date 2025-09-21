@@ -477,3 +477,28 @@ body {
 .doc-table button:hover {
   background: var(--accent-hover);
 }
+
+/* Узкий селект по ширине текста */
+.narrow-select {
+  width: auto;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Узкий инпут по ширине плейсхолдера */
+.narrow-input {
+  width: auto;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  max-width: 160px;
+}

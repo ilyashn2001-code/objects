@@ -304,16 +304,72 @@ document.addEventListener('click', function (e) {
 
 
 
+  
+const documentTypes = [
+  "Акт открытия объекта",
+  "Акты освидетельствования скрытых работ",
+  "Исполнительная документация",
+  "Сертификаты и паспорта на материалы и изделия",
+  "Акт закрытия объекта",
+  "Акт приемки выполненных работ"
+];
 
+function openDocumentModal() {
+  const modal = document.getElementById('documentModal');
+  const body = document.getElementById('documentTableBody');
+  modal.style.display = 'flex';
+  body.innerHTML = '';
 
+  documentTypes.forEach(name => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td style="padding: 10px;">${name}</td>
+      <td style="padding: 10px;">
+        <input type="file" accept=".pdf,.doc,.docx" style="margin-bottom: 5px;" onchange="handleUpload(this)">
+        <button onclick="removeFile(this)">Удалить</button>
+      </td>
+      <td style="padding: 10px;" class="upload-date">—</td>
+    `;
+    body.appendChild(row);
+  });
+}
 
+function handleUpload(input) {
+  const file = input.files[0];
+  const cell = input.closest('td').nextElementSibling;
 
+  if (file && file.size <= 10 * 1024 * 1024) {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ru-RU') + ' ' + now.toLocaleTimeString('ru-RU');
+    cell.textContent = dateStr;
+  } else {
+    alert('Файл слишком большой (максимум 10 МБ).');
+    input.value = '';
+    cell.textContent = '—';
+  }
+}
 
+function removeFile(button) {
+  const input = button.parentElement.querySelector('input[type="file"]');
+  input.value = '';
+  button.closest('td').nextElementSibling.textContent = '—';
+}
 
+// Кнопка "Документы"
+document.addEventListener('click', function (e) {
+  if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Документы') {
+    openDocumentModal();
+  }
 
+  if (e.target.classList.contains('document-close')) {
+    document.getElementById('documentModal').style.display = 'none';
+  }
+});
 
   
 
+
+  
   
   // === Переключение темы ===
   const themeToggle = document.getElementById('themeToggle');

@@ -152,6 +152,8 @@ const ganttData = [
   { name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'Благоустройство' }
 ];
 
+
+  
 function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
     chart: {
@@ -169,11 +171,9 @@ function drawHighchartsGantt() {
     },
     yAxis: {
       type: 'category',
-      grid: {
-        columns: [{
-          title: { text: 'Работы' },     // 👈 заголовок колонки
-          categories: ganttData.map(t => t.name) // 👈 список работ слева
-        }]
+      categories: ganttData.map(t => t.name), // 👈 список работ слева
+      labels: {
+        style: { fontWeight: 'bold', fontSize: '13px' } // жирные названия
       }
     },
     tooltip: {
@@ -197,10 +197,11 @@ function drawHighchartsGantt() {
     series: [{
       name: 'Работы',
       data: ganttData,
-      color: '#60a5fa' // голубой (осталось)
+      color: '#60a5fa' // голубой для оставшегося
     }]
   });
 }
+
 
 
 // === Обработка кнопки "Ганта" ===

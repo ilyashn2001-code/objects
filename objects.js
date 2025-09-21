@@ -162,54 +162,13 @@ function applyFilters() {
 
 // === ДАННЫЕ ДЛЯ ГАНТА (Путевой пр. 38) ===
 const ganttData = [
-  { 
-    name: 'Подготовка площадки',
-    start: Date.UTC(2024, 3, 15),
-    end: Date.UTC(2024, 3, 25),
-    completed: { amount: 1, fill: '#1e3a8a' }
-  },
-  { 
-    name: 'Фундамент',
-    start: Date.UTC(2024, 3, 26),
-    end: Date.UTC(2024, 4, 10),
-    completed: { amount: 0.8, fill: '#1e3a8a' },
-    dependency: 'Подготовка площадки'
-  },
-  { 
-    name: 'Кладка стен',
-    start: Date.UTC(2024, 4, 11),
-    end: Date.UTC(2024, 4, 30),
-    completed: { amount: 0.6, fill: '#1e3a8a' },
-    dependency: 'Фундамент'
-  },
-  { 
-    name: 'Крыша',
-    start: Date.UTC(2024, 5, 1),
-    end: Date.UTC(2024, 5, 15),
-    completed: { amount: 0.4, fill: '#1e3a8a' },
-    dependency: 'Кладка стен'
-  },
-  { 
-    name: 'Внутренние работы',
-    start: Date.UTC(2024, 5, 16),
-    end: Date.UTC(2024, 6, 10),
-    completed: { amount: 0.2, fill: '#1e3a8a' },
-    dependency: 'Крыша'
-  },
-  { 
-    name: 'Благоустройство',
-    start: Date.UTC(2024, 6, 11),
-    end: Date.UTC(2024, 6, 25),
-    completed: { amount: 0, fill: '#1e3a8a' },
-    dependency: 'Внутренние работы'
-  },
-  { 
-    name: 'Сдача объекта',
-    start: Date.UTC(2024, 6, 26),
-    end: Date.UTC(2024, 6, 30),
-    completed: { amount: 0, fill: '#1e3a8a' },
-    dependency: 'Благоустройство'
-  }
+  { name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' } },
+  { name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 0.8, fill: '#1e3a8a' }, dependency: 'Подготовка площадки' },
+  { name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 0.6, fill: '#1e3a8a' }, dependency: 'Фундамент' },
+  { name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 0.4, fill: '#1e3a8a' }, dependency: 'Кладка стен' },
+  { name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 0.2, fill: '#1e3a8a' }, dependency: 'Крыша' },
+  { name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'Внутренние работы' },
+  { name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'Благоустройство' }
 ];
 
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА (Highcharts) ===
@@ -217,32 +176,35 @@ function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
     chart: {
       scrollablePlotArea: {
-        minWidth: 1200,   // скроллим вправо только время
+        minWidth: 1200,
         scrollPositionX: 1
       }
     },
     title: { text: '' },
+    colors: ['#60a5fa'], // фиксируем "осталось" голубым
     xAxis: {
       currentDateIndicator: true,
-      tickInterval: 1000 * 60 * 60 * 24 * 30, // шаг = месяц
-      labels: { format: '{value:%d %b}' }     // день + месяц
+      tickInterval: 1000 * 60 * 60 * 24 * 30,
+      labels: { format: '{value:%d %b}' }
     },
     yAxis: {
       uniqueNames: true,
-      staticScale: 50, // фиксированная высота строк
-      grid: { columns: [{ title: { text: 'Работы' }, categories: ganttData.map(t => t.name) }] }
+      staticScale: 50
     },
     tooltip: {
-      pointFormat:
-        '<b>{point.name}</b><br/>' +
-        '📅 {point.start:%d.%m.%Y} — {point.end:%d.%m.%Y}<br/>' +
-        '⏳ Выполнение: {point.completed.amount:.0%}' // проценты целым числом
+      formatter: function () {
+        return `<b>${this.point.name}</b><br/>
+                📅 ${Highcharts.dateFormat('%d.%m.%Y', this.point.start)} — ${Highcharts.dateFormat('%d.%m.%Y', this.point.end)}<br/>
+                ⏳ Выполнение: ${Highcharts.numberFormat(this.point.completed.amount * 100, 0)}%`;
+      }
     },
     plotOptions: {
       gantt: {
         dataLabels: {
           enabled: true,
-          format: '{point.completed.amount:.0%}', // проценты 20%, 40%
+          formatter: function () {
+            return Highcharts.numberFormat(this.point.completed.amount * 100, 0) + '%';
+          },
           style: { color: 'white', textOutline: 'none' }
         }
       }
@@ -250,7 +212,7 @@ function drawHighchartsGantt() {
     series: [{
       name: 'Работы',
       data: ganttData,
-      color: '#60a5fa' // голубой — оставшееся
+      color: '#60a5fa' // голубой для оставшегося
     }]
   });
 }

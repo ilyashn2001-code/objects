@@ -1,3 +1,4 @@
+/* === ПЕРЕМЕННЫЕ === */
 :root {
   --bg-color: #f7f9fc;
   --text-color: #1e2a3a;
@@ -14,9 +15,8 @@
   --modal-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* === DARK THEME OVERRIDES === */
 [data-theme="dark"] {
-  --bg-color: linear-gradient(135deg, #1e003e, #b71c8d);
+  --bg-color: #1e003e;
   --text-color: #f7f9fc;
   --sidebar-bg: #1c1c1c;
   --sidebar-text: #fff;
@@ -31,50 +31,45 @@
   --modal-bg: rgba(255, 255, 255, 0.15);
 }
 
-/* === BASE STYLES === */
+/* === ОБЩИЕ СТИЛИ === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
-
 html, body {
   height: 100%;
   background: var(--bg-color);
   color: var(--text-color);
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
-
 body {
   font-size: 14px;
   min-height: 100vh;
 }
-
 .app-container {
   display: flex;
   width: 100%;
   min-height: 100vh;
 }
 
+/* === САЙДБАР === */
 .sidebar {
   width: 220px;
   background-color: var(--sidebar-bg);
   color: var(--sidebar-text);
-  padding: 30px 20px 20px;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
 }
-
 .sidebar h2 {
   font-size: 18px;
   margin-bottom: 30px;
 }
-
 .sidebar ul {
   list-style: none;
 }
-
 .sidebar li {
   font-size: 14px;
   margin-bottom: 10px;
@@ -83,44 +78,38 @@ body {
   opacity: 0.85;
   border-radius: 4px;
 }
-
 .sidebar li.active {
   background-color: var(--sidebar-active-bg);
   font-weight: bold;
   opacity: 1;
   position: relative;
 }
-
 .sidebar li.active::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
+  left: 0; top: 0;
+  width: 4px; height: 100%;
   background-color: var(--accent);
   border-radius: 4px 0 0 4px;
 }
 
+/* === ОСНОВНАЯ ОБЛАСТЬ === */
 .main {
   flex: 1;
   padding: 30px;
 }
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding-top: 10px;
 }
-
 .header h1 {
   font-size: 28px;
   font-weight: 600;
-  color: var(--text-color);
 }
 
+/* === ФИЛЬТРЫ === */
 .filters {
   margin: 20px 0;
   display: flex;
@@ -128,43 +117,69 @@ body {
   gap: 10px;
 }
 
-.filters input {
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--input-bg);
+/* Общий стиль */
+.filters input,
+.filters select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid black;
   border-radius: 6px;
-  flex: 1 1 300px;
-  color: var(--text-color);
+  background-color: white;
+  color: black;
+  transition: border 0.2s ease;
 }
 
-
-
-.filters button {
-  padding: 10px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--accent);
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+/* Placeholder */
+.filters input::placeholder {
+  color: #555 !important;
+  opacity: 1;
 }
 
-.filters button:hover {
-  background: var(--accent-hover);
+/* Hover */
+.filters input:hover,
+.filters select:hover {
+  border: 2px solid black;
+  background-color: white !important;
 }
 
-.arrow {
-  font-size: 10px;
+/* SELECT — стиль и стрелка */
+.filters select {
+  color: #555;
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='5' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 6L0.5 0.5H9.5L5 6Z' fill='%23555'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px;
+  padding-right: 28px;
+  appearance: none;
 }
 
+/* Удалить стрелки у текстовых инпутов */
+.filters input[type="text"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  background-image: none !important;
+  padding-right: 12px;
+}
+
+/* Индивидуальные ширины */
+#districtFilter { width: 70px; }
+#typeFilter { width: 110px; }
+#dateStartFilter { width: 135px; }
+#dateEndFilter { width: 130px; }
+#fioFilter { width: 150px; }
+#violationFilter { width: 110px; }
+#searchInput {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* === КАРТОЧКИ ОБЪЕКТОВ === */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 20px;
 }
-
 .object-card {
   background: var(--card-bg);
   border-radius: 10px;
@@ -175,63 +190,42 @@ body {
   gap: 10px;
   border: 1px solid var(--border-color);
 }
-
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .card-header h3 {
   font-size: 16px;
   line-height: 1.3;
-  max-height: 2.6em; /* Ограничение по высоте для 2 строк */
+  max-height: 2.6em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; 
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   word-break: break-word;
 }
-
-
 .status {
   font-size: 13px;
   padding: 4px 10px;
   border-radius: 20px;
   font-weight: bold;
 }
-
-.status-active {
-  background: #d1fae5;
-  color: #065f46;
-}
 .status-complete {
   background: #e5e7eb;
   color: #374151;
 }
-.status-paused {
-  background: #fef3c7;
-  color: #92400e;
-}
-
 .progress {
   background: #e5e7eb;
   height: 6px;
   border-radius: 4px;
   overflow: hidden;
 }
-
 .bar {
   background-color: var(--accent);
   height: 100%;
 }
-
-.percent {
-  font-weight: bold;
-  font-size: 16px;
-}
-
 .meta {
   display: flex;
   flex-wrap: wrap;
@@ -239,13 +233,11 @@ body {
   font-size: 14px;
   color: var(--text-color);
 }
-
 .actions {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
-
 .actions button {
   font-size: 12px;
   padding: 6px 10px;
@@ -255,13 +247,12 @@ body {
   color: var(--text-color);
   cursor: pointer;
 }
-
 .actions button:hover {
   background-color: var(--accent-hover);
   color: white;
 }
 
-/* === CHAT MODAL === */
+/* === МОДАЛ ЧАТ === */
 .chat-modal {
   display: none;
   position: fixed;
@@ -273,7 +264,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 .chat-box {
   width: 600px;
   height: 800px;
@@ -284,7 +274,6 @@ body {
   flex-direction: column;
   box-shadow: 0 10px 20px var(--card-shadow);
 }
-
 .chat-box-header {
   background: var(--sidebar-bg);
   color: var(--sidebar-text);
@@ -293,30 +282,21 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
-.chat-box-header h3 {
-  margin: 0;
-  font-size: 16px;
-}
-
 .chat-close {
   cursor: pointer;
   font-size: 20px;
 }
-
 .chat-box-body {
   flex: 1;
   padding: 16px;
   overflow-y: auto;
   font-size: 14px;
 }
-
 .chat-box-input {
   border-top: 1px solid var(--border-color);
   padding: 10px;
   background: var(--input-bg);
 }
-
 .chat-box-input input {
   width: 100%;
   padding: 10px;
@@ -327,331 +307,13 @@ body {
   color: var(--text-color);
 }
 
-/* === Кнопочный стиль для фильтров (кроме поиска) === */
-.filters select,
-.filters input:not(#searchInput) {
-  padding: 10px 14px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background: white;
-  color: black;
-  cursor: pointer;
-  font-size: 14px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 8L0.803848 0.5L11.1962 0.5L6 8Z' fill='black'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 12px;
-  padding-right: 36px;
-}
-
-.narrow-input::placeholder {
-  color: #555 !important;
-}
-
-.filters select::-ms-expand {
-  display: none;
-}
-
-
-.filters select:hover,
-.filters input:not(#searchInput):hover {
-  background: var(--accent-hover);
-}
-
-/* Белое поле поиска */
-#searchInput {
-  background: var(--input-bg) !important;
-  color: var(--text-color) !important;
-  border: 1px solid var(--border-color);
-  padding: 10px 14px;
-  border-radius: 6px;
-  flex: 1 1 300px;
-}
-
-/* Placeholder для поиска */
-#searchInput::placeholder {
-  color: #666;
-}
-
-/* Узкие фильтры */
-#dateFilter,
-#fioFilter,
-#violationFilter {
-  flex: 0 0 160px;
-  max-width: 160px;
-}
-/* Белые плейсхолдеры для конкретных фильтров */
-#dateFilter::placeholder,
-#fioFilter::placeholder,
-#violationFilter::placeholder {
-  color: white;
-}
-
-
-.chat-option {
-  padding: 12px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  margin: 6px 12px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.chat-option:hover {
-  background: var(--accent-hover);
-}
-
-#chatBackBtn {
-  background: transparent;
-  border: none;
-  color: var(--accent);
-  font-size: 14px;
-  padding: 10px 16px;
-  text-align: left;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.chat-select {
-  display: flex;
-  flex-direction: column; /* Кнопки по вертикали */
-  align-items: flex-start; /* Выравнивание по левому краю */
-  gap: 10px; /* Отступы между кнопками */
-  padding: 20px;
-}
-.chat-select {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 20px;
-}
-
-.chat-select .chat-option {
-  width: 100%; /* 👈 Кнопка занимает всю ширину родителя */
-  max-width: 300px; /* 👈 Опционально — ограничить ширину */
-}
-
-.chat-option {
-  text-align: left; /* 👈 Выравнивание текста по левому краю */
-  padding-left: 16px; /* 👈 Добавим отступ слева для красоты */
-}
-/* === GANT MODAL === */
+/* === GANT МОДАЛ === */
 #gantModal .chat-box-header h3 {
   font-size: 18px;
   font-weight: 600;
 }
-
 #gantModal .chat-box-body {
   background: var(--card-bg);
   text-align: center;
   padding: 20px;
-}
-
-.doc-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  color: var(--text-color);
-}
-
-.doc-table th,
-.doc-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid var(--border-color);
-  text-align: left;
-  vertical-align: middle;
-}
-
-.doc-table th {
-  background: var(--accent);
-  color: white;
-  font-weight: 600;
-}
-
-.doc-table input[type="file"] {
-  font-size: 13px;
-  max-width: 180px;
-}
-
-.doc-table button {
-  margin-top: 4px;
-  padding: 5px 10px;
-  font-size: 12px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.doc-table button:hover {
-  background: var(--accent-hover);
-}
-
-/* Узкий селект по ширине текста */
-.narrow-select {
-  width: auto;
-  padding: 10px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--accent);
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-/* Узкий инпут по ширине плейсхолдера */
-.narrow-input {
-  width: auto;
-  padding: 10px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--accent);
-  color: white;
-  font-size: 14px;
-  max-width: 160px;
-}
-/* Плейсхолдеры белые */
-#dateStartFilter::placeholder,
-#dateEndFilter::placeholder {
-  color: white;
-}
-.narrow-input {
-  background: white !important;
-  color: black !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-/* Убираем голубой фон при наведении */
-.narrow-input:hover {
-  background: white !important;
-  color: black !important;
-}
-/* 🔧 Исправление narrow-input */
-.narrow-input {
-  background-color: white !important;
-  color: black !important;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 10px 14px;
-}
-
-.narrow-input::placeholder {
-  color: #333 !important;
-}
-
-.narrow-input:hover {
-  background-color: white !important;
-  color: black !important;
-}
-/* === ОБЩИЙ СТИЛЬ ДЛЯ ВСЕХ ФИЛЬТРОВ === */
-.filters input,
-.filters select {
-  padding: 10px 12px;
-  font-size: 14px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background-color: white;
-  color: black;
-  transition: border 0.2s ease;
-}
-
-.filters input:hover,
-.filters select:hover {
-  border: 2px solid black;
-  background-color: white;
-}
-
-/* === УБИРАЕМ СТРЕЛКИ У input[type="text"] === */
-.filters input[type="text"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  background-image: none !important;
-  padding-right: 12px;
-}
-
-/* === КОМПАКТНЫЕ SELECT === */
-.select-compact {
-  width: 130px;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 6L0.5 0.5H9.5L5 6Z' fill='black'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 10px;
-  padding-right: 28px;
-}
-
-/* === УБИРАЕМ голубой ХОВЕР у input/select === */
-.filters input:hover,
-.filters select:hover {
-  background-color: white !important;
-}
-/* === Явный стиль для всех плейсхолдеров input === */
-.filters input::placeholder {
-  color: #555 !important;
-  opacity: 1;
-}
-/* Общий стиль для инпутов и селектов */
-.filters input,
-.filters select {
-  padding: 10px 12px;
-  font-size: 14px;
-  border: 1px solid black;
-  border-radius: 6px;
-  background-color: white;
-  color: black;
-  transition: border 0.2s ease;
-}
-
-/* === Серый текст для SELECT === */
-.filters select {
-  color: #555;
-}
-
-/* === Толстая рамка при ховере === */
-.filters input:hover,
-.filters select:hover {
-  border: 2px solid black;
-  background-color: white;
-}
-
-/* === Убираем стрелку у текстовых инпутов === */
-.filters input[type="text"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  background-image: none !important;
-  padding-right: 12px;
-}
-
-/* === Ширина инпутов === */
-.date-filter {
-  width: 120px;
-}
-
-.wide-filter {
-  width: 160px;
-}
-
-/* === Общая ширина стрелочных SELECT === */
-.select-compact {
-  width: 130px;
-  background-image: url("data:image/svg+xml,%3Csvg width='8' height='5' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 6L0.5 0.5H9.5L5 6Z' fill='%23555'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 8px;
-  padding-right: 28px;
-}
-
-/* === Placeholder-цвет для всех input'ов === */
-.filters input::placeholder {
-  color: #555 !important;
-  opacity: 1;
 }

@@ -341,16 +341,18 @@ function openDocumentModal() {
   documentTypes.forEach(name => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td style="padding: 10px;">${name}</td>
-      <td style="padding: 10px;">
-        <input type="file" accept=".pdf,.doc,.docx" style="margin-bottom: 5px;" onchange="handleUpload(this)">
+      <td>${name}</td>
+      <td>
+        <input type="file" accept=".pdf,.doc,.docx" onchange="handleUpload(this)">
         <button onclick="removeFile(this)">Удалить</button>
       </td>
-      <td style="padding: 10px;" class="upload-date">—</td>
+      <td class="upload-date">—</td>
+      <td><input type="text" placeholder="Комментарий..." /></td>
     `;
     body.appendChild(row);
   });
 }
+
 
 function handleUpload(input) {
   const file = input.files[0];

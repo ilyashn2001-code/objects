@@ -6,9 +6,7 @@ const objects = [
   { title: 'Дворовая территория по адресу: Каргопольская ул. 18', status: 'Завершён', percent: 100, fio: 'Петров Д.С.', dates: '15.04.2024-28.08.2024', district: 'СВАО', violations: '3, проверок: 2', documents: '75%', photos: 10 },
   { title: 'Дворовая территория по адресу: Бестужевых ул. 27А', status: 'Завершён', percent: 100, fio: 'Иванова Н.А.', dates: '15.04.2024-23.08.2024', district: 'СВАО', violations: '0, проверок: 1', documents: '88%', photos: 6 },
   { title: 'Дворовая территория по адресу: Челобитьевское шоссе 14 к.3, 14 к.4, 14 к.5', status: 'Завершён', percent: 100, fio: 'Кузнецов А.В.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '2, проверок: 2', documents: '82%', photos: 11 },
-  { title: 'Дворовая территория по адресу: Путевой пр. 38', status: 'Завершён', percent: 100, fio: 'Орлова Е.И.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '1, проверок: 0', documents: '95%', photos: 7 },
-  { title: 'Дворовая территория по адресу: Мира просп. 194', status: 'Завершён', percent: 100, fio: 'Фёдоров М.Г.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '0, проверок: 1', documents: '97%', photos: 9 },
-  { title: 'Некрасовка', status: 'Завершён', percent: 100, fio: 'Сидорова Л.П.', dates: '03.05.2024-30.09.2024', district: 'ЮВАО', violations: '2, проверок: 1', documents: '80%', photos: 13 }
+  { title: 'Дворовая территория по адресу: Мира просп. 194', status: 'Завершён', percent: 100, fio: 'Фёдоров М.Г.', dates: '15.04.2024-20.08.2024', district: 'СВАО', violations: '0, проверок: 1', documents: '97%', photos: 9 }
 ];
 
 

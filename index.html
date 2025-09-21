@@ -148,18 +148,18 @@
 
 <!-- Модалка документов -->
 <div id="documentModal" class="chat-modal">
-  <div class="chat-box" style="width: 700px; max-height: 90vh; overflow-y: auto;">
+  <div class="chat-box" style="width: 1050px; max-height: 85vh; overflow-y: auto;">
     <div class="chat-box-header">
       <h3>Документы по объекту</h3>
       <span class="chat-close document-close">&times;</span>
     </div>
     <div class="chat-box-body">
-      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+      <table class="doc-table">
         <thead>
-          <tr style="background: var(--accent); color: white;">
-            <th style="text-align: left; padding: 10px;">Наименование</th>
-            <th style="text-align: left; padding: 10px;">Загрузка документа</th>
-            <th style="text-align: left; padding: 10px;">Дата загрузки</th>
+          <tr>
+            <th>Наименование</th>
+            <th>Загрузка документа</th>
+            <th>Дата загрузки</th>
           </tr>
         </thead>
         <tbody id="documentTableBody"></tbody>
@@ -167,6 +167,7 @@
     </div>
   </div>
 </div>
+
 
   
 

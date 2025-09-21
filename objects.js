@@ -144,13 +144,13 @@ function applyFilters() {
 
 // === ДАННЫЕ ДЛЯ ГАНТА (Путевой пр. 38) ===
 const ganttData = [
-  { id: '1', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' } },
-  { id: '2', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 0.8, fill: '#1e3a8a' }, dependency: '1' },
-  { id: '3', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 0.6, fill: '#1e3a8a' }, dependency: '2' },
-  { id: '4', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 0.4, fill: '#1e3a8a' }, dependency: '3' },
-  { id: '5', name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 0.2, fill: '#1e3a8a' }, dependency: '4' },
-  { id: '6', name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 0, fill: '#1e3a8a' }, dependency: '5' },
-  { id: '7', name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0, fill: '#1e3a8a' }, dependency: '6' }
+  { name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' } },
+  { name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 0.8, fill: '#1e3a8a' }, dependency: 'Подготовка площадки' },
+  { name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 0.6, fill: '#1e3a8a' }, dependency: 'Фундамент' },
+  { name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 0.4, fill: '#1e3a8a' }, dependency: 'Кладка стен' },
+  { name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 0.2, fill: '#1e3a8a' }, dependency: 'Крыша' },
+  { name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'Внутренние работы' },
+  { name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'Благоустройство' }
 ];
 
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА (Highcharts) ===
@@ -158,26 +158,20 @@ function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
     chart: {
       scrollablePlotArea: {
-        minWidth: 1200,   // если не помещается — появляется скролл вправо
+        minWidth: 1200,
         scrollPositionX: 1
       }
     },
-    title: { text: '' }, // убрали заголовок внутри диаграммы
+    title: { text: '' },
     colors: ['#60a5fa'], // фиксируем "осталось" голубым
     xAxis: {
       currentDateIndicator: true,
-      tickInterval: 1000 * 60 * 60 * 24 * 30, // шаг = месяц
-      labels: { format: '{value:%d %b}' }     // показываем день и месяц
+      tickInterval: 1000 * 60 * 60 * 24 * 30,
+      labels: { format: '{value:%d %b}' }
     },
     yAxis: {
-      type: 'category',
-      categories: ganttData.map(t => t.name), // список работ слева
-      labels: {
-        style: { fontWeight: 'bold', fontSize: '13px' } // жирные названия
-      },
-      min: 0,
-      max: ganttData.length - 1,
-      staticScale: 50 // фиксированная высота строк
+      uniqueNames: true,
+      staticScale: 50
     },
     tooltip: {
       formatter: function () {
@@ -200,16 +194,7 @@ function drawHighchartsGantt() {
     series: [{
       name: 'Работы',
       data: ganttData,
-      color: '#60a5fa', // голубой = оставшееся
-      connectors: {
-        lineColor: '#1e3a8a', // цвет стрелок
-        marker: {
-          enabled: true,
-          symbol: 'arrow',    // наконечник-стрелка
-          radius: 4,
-          fillColor: '#1e3a8a'
-        }
-      }
+      color: '#60a5fa' // голубой для оставшегося
     }]
   });
 }
@@ -232,6 +217,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
 
 
 

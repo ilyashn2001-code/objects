@@ -206,7 +206,7 @@ const ganttByTitle = {
   { id: 'task5', name: 'ОБУСТРОЙСТВО МАФ ТЕРРИТОРИЙ', completed: { amount: 0.00, fill: '#1e3a8a' }, dependency: 'task4' },
   { id: 'task6', name: 'УСТАНОВКА ОГРАЖДЕНИЯ ДЕТСКОЙ ПЛОЩАДКИ', completed: { amount: 0.00, fill: '#1e3a8a' }, dependency: 'task5' }
   ],
-  'Дворовая территория по адресу: Челобитьевское': [
+  'Дворовая территория по адресу: Челобитьевское шоссе 14 к.3, 14 к.4, 14 к.5': [
    { id: 'task0', name: 'Замена ограждения контейнерной площадки в рамках благоустройства территории', completed: { amount: 0.00, fill: '#1e3a8a' } },
   { id: 'task1', name: 'ОБУСТРОЙСТВО МАФ ТЕРРИТОРИЙ', completed: { amount: 0.00, fill: '#1e3a8a' }, dependency: 'task0' },
   { id: 'task2', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 0.00, fill: '#1e3a8a' }, dependency: 'task1' },

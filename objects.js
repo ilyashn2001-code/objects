@@ -107,16 +107,33 @@ function applyFilters() {
   const text = document.getElementById('searchInput').value.toLowerCase();
   const district = document.getElementById('districtFilter').value;
   const type = document.getElementById('typeFilter').value;
-  const date = document.getElementById('dateFilter').value;
   const fio = document.getElementById('fioFilter').value.toLowerCase();
   const violations = document.getElementById('violationFilter').value;
+  const dateStart = document.getElementById('dateStartFilter').value;
+  const dateEnd = document.getElementById('dateEndFilter').value;
+
+  function parseDateString(str) {
+    const [day, month, year] = str.split('.').map(Number);
+    return new Date(year, month - 1, day);
+  }
 
   const filtered = objects.filter(obj => {
+    const [startStr, endStr] = obj.dates.split('-');
+    const startDateObj = parseDateString(startStr.trim());
+    const endDateObj = parseDateString(endStr.trim());
+
+    const userStartDate = dateStart ? parseDateString(dateStart) : null;
+    const userEndDate = dateEnd ? parseDateString(dateEnd) : null;
+
+    const startMatch = !userStartDate || startDateObj >= userStartDate;
+    const endMatch = !userEndDate || endDateObj <= userEndDate;
+
     return (
       obj.title.toLowerCase().includes(text) &&
       (district === '' || obj.district === district) &&
       (type === '' || obj.title.includes(type)) &&
-      (date === '' || obj.dates.includes(date)) &&
+      startMatch &&
+      endMatch &&
       (fio === '' || obj.fio.toLowerCase().includes(fio)) &&
       (violations === '' || obj.violations.startsWith(violations))
     );
@@ -125,8 +142,9 @@ function applyFilters() {
   renderCards(filtered);
 }
 
+
 // Навешиваем обработчики на все фильтры
-['searchInput', 'districtFilter', 'typeFilter', 'dateFilter', 'fioFilter', 'violationFilter'].forEach(id => {
+['searchInput', 'districtFilter', 'typeFilter', 'dateStartFilter', 'dateEndFilter', 'fioFilter', 'violationFilter'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', applyFilters);
 });

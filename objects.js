@@ -174,15 +174,30 @@ const ganttData = [
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА (Highcharts) ===
 function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
-   title: { text: '' },
-    xAxis: { currentDateIndicator: true },
+    chart: {
+      scrollablePlotArea: {
+        minWidth: 1200, // если не помещается — появляется скролл
+        scrollPositionX: 1
+      }
+    },
+    title: { text: '' }, // убрали заголовок внутри
+    xAxis: { 
+      currentDateIndicator: true,
+      tickInterval: 1000 * 60 * 60 * 24 * 30 // шаг = месяц, без недель
+    },
     yAxis: { uniqueNames: true },
     tooltip: {
       pointFormat: '<b>{point.name}</b><br/>📅 {point.start:%d.%m.%Y} — {point.end:%d.%m.%Y}<br/>⏳ Выполнение: {point.completed.amount:%p}'
     },
+    plotOptions: {
+      gantt: {
+        dataLabels: { enabled: true, format: '{point.completed.amount:%p}' }
+      }
+    },
     series: [{
       name: 'Работы',
-      data: ganttData
+      data: ganttData,
+      color: '#60a5fa' // основной цвет "осталось" (голубой)
     }]
   });
 }
@@ -194,7 +209,7 @@ document.addEventListener('click', function (e) {
     const title = card.querySelector('h3').textContent;
 
     if (title.includes('Путевой пр. 38')) {
-      drawHighchartsGantt(); // 👈 теперь Highcharts
+      drawHighchartsGantt(); 
       document.getElementById('gantModal').style.display = 'flex';
     } else {
       alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');

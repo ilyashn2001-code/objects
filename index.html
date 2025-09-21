@@ -59,25 +59,26 @@
         <button id="themeToggle" class="theme-toggle" title="Переключить тему">🌗</button>
       </header>
 
-     <div class="filters">
+    <div class="filters">
   <input type="text" id="searchInput" placeholder="Поиск по названию или адресу" />
 
-  <select id="districtFilter">
+  <select id="districtFilter" class="select-compact">
     <option value="">Округ</option>
     <option value="САО">САО</option>
     <option value="СВАО">СВАО</option>
   </select>
 
-  <select id="typeFilter">
+  <select id="typeFilter" class="select-compact">
     <option value="">Тип объекта</option>
     <option value="Дворовая территория">Дворовая территория</option>
   </select>
 
-<input type="text" id="dateStartFilter" placeholder="Начало периода" class="narrow-input" />
-<input type="text" id="dateEndFilter" placeholder="Конец периода" class="narrow-input" />
+  <input type="text" id="dateStartFilter" placeholder="Начало периода" />
+  <input type="text" id="dateEndFilter" placeholder="Конец периода" />
   <input type="text" id="fioFilter" placeholder="Ответственный" />
   <input type="text" id="violationFilter" placeholder="Нарушения" />
 </div>
+
 
 
       <div class="cards-container" id="objectList">

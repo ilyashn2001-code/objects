@@ -54,11 +54,11 @@ const objects = [
     });
   }
 
-  document.getElementById('searchInput').addEventListener('input', function () {
-    const val = this.value.toLowerCase();
-    const filtered = objects.filter(o => o.title.toLowerCase().includes(val));
-    renderCards(filtered);
-  });
+['searchInput', 'districtFilter', 'typeFilter', 'dateStartFilter', 'dateEndFilter', 'fioFilter', 'violationFilter'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', applyFilters);
+});
+
 
   renderCards(objects);
 

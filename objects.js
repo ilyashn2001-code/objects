@@ -156,15 +156,16 @@ function applyDefaultDates(tasks) {
 }
   
 const ganttByTitle = {
-  'Дворовая территория по адресу: Путевой пр. 38': [
-    { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' } },
-    { id: 'task1', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 0.8, fill: '#1e3a8a' }, dependency: 'task0' },
-    { id: 'task2', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 0.6, fill: '#1e3a8a' }, dependency: 'task1' },
-    { id: 'task3', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 0.4, fill: '#1e3a8a' }, dependency: 'task2' },
-    { id: 'task4', name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 0.2, fill: '#1e3a8a' }, dependency: 'task3' },
-    { id: 'task5', name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'task4' },
-    { id: 'task6', name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0, fill: '#1e3a8a' }, dependency: 'task5' }
-  ],
+'Дворовая территория по адресу: Путевой пр. 38': [
+  { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' } },
+  { id: 'task1', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task0' },
+  { id: 'task2', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task1' },
+  { id: 'task3', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task2' },
+  { id: 'task4', name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task3' },
+  { id: 'task5', name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task4' },
+  { id: 'task6', name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task5' }
+],
+
 
 'Дворовая территория по адресу: Флотская ул. 54, 58 к.1': applyDefaultDates([
   { id: 'task0', name: 'Ремонт покрытия асфальтобетонного проезда в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' } },

@@ -121,6 +121,7 @@
 </div>
 
 
+
 <!-- Модалка диаграммы Ганта -->
 <div id="gantModal" class="chat-modal">
   <div class="chat-box" style="width: 1200px; height: 600px;">
@@ -128,12 +129,14 @@
       <h3>Диаграмма Ганта — Путевой пр. 38</h3>
       <span class="chat-close gant-close">&times;</span>
     </div>
-    <div class="chat-box-body" style="overflow-x: auto; display: flex; flex-direction: column; align-items: center;">
-      <!-- контейнер под диаграмму -->
-      <div id="gantChart" style="width: 1500px; min-height: 400px;"></div>
+
+    <!-- Основной скролл по горизонтали -->
+    <div class="chat-box-body" style="overflow-x: auto; width: 100%; padding: 20px; box-sizing: border-box;">
+      <!-- контейнер без фиксированной ширины -->
+      <div id="gantChart" style="min-width: 1500px; min-height: 400px;"></div>
 
       <!-- 👇 легенда -->
-      <div id="gantLegend" style="margin-top:10px; display:flex; justify-content:center; gap:20px; font-size:14px;">
+      <div id="gantLegend" style="margin-top: 10px; display: flex; justify-content: center; gap: 20px; font-size: 14px;">
         <div style="display:flex; align-items:center;">
           <span style="display:inline-block;width:20px;height:10px;background:#1e3a8a;margin-right:6px;"></span>
           Сделано

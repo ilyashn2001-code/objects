@@ -176,28 +176,39 @@ function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
     chart: {
       scrollablePlotArea: {
-        minWidth: 1200, // если не помещается — появляется скролл
+        minWidth: 1200,   // таймлайн можно скроллить вправо
         scrollPositionX: 1
       }
     },
-    title: { text: '' }, // убрали заголовок внутри
-    xAxis: { 
+    title: { text: '' },
+    xAxis: {
       currentDateIndicator: true,
-      tickInterval: 1000 * 60 * 60 * 24 * 30 // шаг = месяц, без недель
+      tickInterval: 1000 * 60 * 60 * 24 * 30, // шаг = месяц
+      labels: { format: '{value:%d %b}' }     // показываем дни и месяцы
     },
-    yAxis: { uniqueNames: true },
+    yAxis: {
+      uniqueNames: true,
+      staticScale: 50   // фиксированная высота строк, всегда видно все задачи
+    },
     tooltip: {
-      pointFormat: '<b>{point.name}</b><br/>📅 {point.start:%d.%m.%Y} — {point.end:%d.%m.%Y}<br/>⏳ Выполнение: {point.completed.amount:%p}'
+      pointFormat:
+        '<b>{point.name}</b><br/>' +
+        '📅 {point.start:%d.%m.%Y} — {point.end:%d.%m.%Y}<br/>' +
+        '⏳ Выполнение: {point.completed.amount:%p}'
     },
     plotOptions: {
       gantt: {
-        dataLabels: { enabled: true, format: '{point.completed.amount:%p}' }
+        dataLabels: {
+          enabled: true,
+          format: '{point.completed.amount:%p}', // проценты внутри
+          style: { color: 'white', textOutline: 'none' }
+        }
       }
     },
     series: [{
       name: 'Работы',
       data: ganttData,
-      color: '#60a5fa' // основной цвет "осталось" (голубой)
+      color: '#60a5fa' // голубой (оставшееся)
     }]
   });
 }
@@ -209,7 +220,7 @@ document.addEventListener('click', function (e) {
     const title = card.querySelector('h3').textContent;
 
     if (title.includes('Путевой пр. 38')) {
-      drawHighchartsGantt(); 
+      drawHighchartsGantt();
       document.getElementById('gantModal').style.display = 'flex';
     } else {
       alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');
@@ -220,7 +231,6 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
-
 
 
 

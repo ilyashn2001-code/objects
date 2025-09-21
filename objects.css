@@ -347,8 +347,8 @@ body {
   padding-right: 36px;
 }
 
-.filters input::placeholder {
-  color: black;
+.narrow-input::placeholder {
+  color: #555 !important;
 }
 
 .filters select::-ms-expand {

@@ -523,3 +523,14 @@ body {
 #dateEndFilter::placeholder {
   color: white;
 }
+.narrow-input {
+  background: white !important;
+  color: black !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Убираем голубой фон при наведении */
+.narrow-input:hover {
+  background: white !important;
+  color: black !important;
+}

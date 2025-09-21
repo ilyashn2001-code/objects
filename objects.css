@@ -163,12 +163,12 @@ body {
 }
 
 /* Индивидуальные ширины */
-#districtFilter { width: 70px; }
-#typeFilter { width: 110px; }
-#dateStartFilter { width: 135px; }
-#dateEndFilter { width: 130px; }
+#districtFilter { width: 80px; }
+#typeFilter { width: 120px; }
+#dateStartFilter { width: 145px; }
+#dateEndFilter { width: 140px; }
 #fioFilter { width: 150px; }
-#violationFilter { width: 110px; }
+#violationFilter { width: 120px; }
 #searchInput {
   flex: 1;
   min-width: 260px;

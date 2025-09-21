@@ -426,3 +426,47 @@ body {
   background: var(--accent-hover);
   color: #fff;
 }
+/* --- Заголовок модалки без лишней линии --- */
+.chat-box-header {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border-bottom убираем */
+  border-bottom: none;
+}
+
+/* --- Шапка таблицы (фон как у кнопки сохранить) --- */
+.doc-table th {
+  background: var(--accent);     /* 👈 голубой фон */
+  color: #fff;                   /* белый текст */
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* --- Ячейки таблицы --- */
+.doc-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+/* --- Красная кнопка Удалить --- */
+.doc-table button {
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: none;
+  background: #dc3545;      /* красный */
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.doc-table button:hover {
+  background: #b02a37;      /* тёмно-красный при наведении */
+}

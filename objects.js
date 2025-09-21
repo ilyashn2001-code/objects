@@ -152,102 +152,38 @@ function applyFilters() {
   if (el) el.addEventListener('input', applyFilters);
 });
 
+
+
+
+
+
+
+
+
 // === ДАННЫЕ ДЛЯ ГАНТА (Путевой пр. 38) ===
 const ganttData = [
-  ['1', 'Подготовка площадки', 'Работы', new Date(2024,3,15), new Date(2024,3,25), null, 100, null],
-  ['2', 'Фундамент', 'Работы', new Date(2024,3,26), new Date(2024,4,10), null, 80, '1'],
-  ['3', 'Кладка стен', 'Работы', new Date(2024,4,11), new Date(2024,4,30), null, 60, '2'],
-  ['4', 'Крыша', 'Работы', new Date(2024,5,1), new Date(2024,5,15), null, 40, '3'],
-  ['5', 'Внутренние работы', 'Работы', new Date(2024,5,16), new Date(2024,6,10), null, 20, '4'],
-  ['6', 'Благоустройство', 'Работы', new Date(2024,6,11), new Date(2024,6,25), null, 0, '5'],
-  ['7', 'Сдача объекта', 'Работы', new Date(2024,6,26), new Date(2024,6,30), null, 0, '6']
+  { name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1 } },
+  { name: 'Фундамент',          start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 0.8 }, dependency: 'Подготовка площадки' },
+  { name: 'Кладка стен',        start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 0.6 }, dependency: 'Фундамент' },
+  { name: 'Крыша',              start: Date.UTC(2024, 5, 1),  end: Date.UTC(2024, 5, 15), completed: { amount: 0.4 }, dependency: 'Кладка стен' },
+  { name: 'Внутренние работы',  start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 0.2 }, dependency: 'Крыша' },
+  { name: 'Благоустройство',    start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 0 },   dependency: 'Внутренние работы' },
+  { name: 'Сдача объекта',      start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0 },   dependency: 'Благоустройство' }
 ];
 
-
-
-
-
-  
-
-
-
-
-
-  // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА ===
-google.charts.load('current', { packages:['gantt'], language: 'ru' }); // 👈 язык русский
-  
-function drawGantt() {
-  const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Task ID');
-  data.addColumn('string', 'Task Name');
-  data.addColumn('string', 'Resource');
-  data.addColumn('date', 'Start Date');
-  data.addColumn('date', 'End Date');
-  data.addColumn('number', 'Duration');
-  data.addColumn('number', 'Percent Complete');
-  data.addColumn('string', 'Dependencies');
-  data.addColumn({ type: 'string', role: 'tooltip' });
-
-  ganttData.forEach(row => {
-    const [id, task, resource, start, end, duration, percent, dep] = row;
-
-    const tooltip = `
-      <b>${task}</b><br>
-      📅 ${start.toLocaleDateString('ru-RU')} — ${end.toLocaleDateString('ru-RU')}<br>
-      ⏳ Выполнение: ${percent}%
-    `;
-
-    data.addRow([id, task, resource, start, end, duration, percent, dep, tooltip]);
-  });
-
-  const options = {
-    height: ganttData.length * 50,
-    gantt: { trackHeight: 40 },
-    tooltip: { isHtml: true }
-  };
-
-  const chart = new google.visualization.Gantt(document.getElementById('gantChart'));
-
-  google.visualization.events.addListener(chart, 'ready', () => {
-    localizeGantt();
-    straightenArrows(); // 👈 делаем стрелки под 90 градусов
-  });
-
-  chart.draw(data, options);
-}
-
-// === Локализация заголовков ===
-function localizeGantt() {
-  document.querySelectorAll('#gantChart text').forEach(el => {
-    if (el.textContent === 'Duration') el.textContent = 'Продолжительность';
-    if (el.textContent === 'Percent Done') el.textContent = 'Выполнение';
-    if (el.textContent === 'Resource') el.textContent = 'Ресурс';
-  });
-}
-
-// === Перерисовка стрелок (угловые линии) ===
-function straightenArrows() {
-  const svg = document.querySelector('#gantChart svg');
-  if (!svg) return;
-
-  svg.querySelectorAll('path').forEach(p => {
-    const d = p.getAttribute('d');
-    if (!d) return;
-
-    // ищем кривые линии (Bezier "C")
-    if (d.includes('C')) {
-      const coords = d.match(/M([\d.]+),([\d.]+).* ([\d.]+),([\d.]+)/);
-      if (coords) {
-        const x1 = parseFloat(coords[1]);
-        const y1 = parseFloat(coords[2]);
-        const x2 = parseFloat(coords[3]);
-        const y2 = parseFloat(coords[4]);
-
-        // строим прямую с углом: вправо → вниз
-        const newD = `M${x1},${y1} L${x2},${y1} L${x2},${y2}`;
-        p.setAttribute('d', newD);
-      }
-    }
+// === ФУНКЦИЯ РИСОВАНИЯ ГАНТА (Highcharts) ===
+function drawHighchartsGantt() {
+  Highcharts.ganttChart('gantChart', {
+    title: { text: 'Диаграмма Ганта — Путевой пр. 38' },
+    xAxis: { currentDateIndicator: true },
+    yAxis: { uniqueNames: true },
+    tooltip: {
+      pointFormat: '<b>{point.name}</b><br/>📅 {point.start:%d.%m.%Y} — {point.end:%d.%m.%Y}<br/>⏳ Выполнение: {point.completed.amount:%p}'
+    },
+    series: [{
+      name: 'Работы',
+      data: ganttData
+    }]
   });
 }
 
@@ -258,7 +194,7 @@ document.addEventListener('click', function (e) {
     const title = card.querySelector('h3').textContent;
 
     if (title.includes('Путевой пр. 38')) {
-      google.charts.setOnLoadCallback(drawGantt);
+      drawHighchartsGantt(); // 👈 теперь Highcharts
       document.getElementById('gantModal').style.display = 'flex';
     } else {
       alert('Диаграмма Ганта доступна только для объекта: Путевой пр. 38');
@@ -269,6 +205,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('gantModal').style.display = 'none';
   }
 });
+
 
 
 

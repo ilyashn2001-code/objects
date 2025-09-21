@@ -534,3 +534,18 @@ body {
   background: white !important;
   color: black !important;
 }
+/* 🔧 Исправление narrow-input */
+.narrow-input {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.narrow-input::placeholder {
+  color: #333 !important;
+}
+
+.narrow-input:hover {
+  background-color: white !important;
+  color: black !important;
+}

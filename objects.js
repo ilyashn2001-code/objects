@@ -173,8 +173,11 @@ function drawHighchartsGantt() {
       type: 'category',
       categories: ganttData.map(t => t.name), // 👈 список работ слева
       labels: {
-        style: { fontWeight: 'bold', fontSize: '13px' } // жирные названия
-      }
+        style: { fontWeight: 'bold', fontSize: '13px' }
+      },
+      min: 0,
+      max: ganttData.length - 1, // фиксируем диапазон, чтобы строки были одинаковыми
+      staticScale: 50             // высота строки (px)
     },
     tooltip: {
       formatter: function () {
@@ -197,11 +200,23 @@ function drawHighchartsGantt() {
     series: [{
       name: 'Работы',
       data: ganttData,
-      color: '#60a5fa' // голубой для оставшегося
+      color: '#60a5fa', // голубой для оставшегося
+      connectors: {
+        lineColor: '#1e3a8a', // цвет стрелки
+        marker: {
+          enabled: true,
+          symbol: 'arrow',    // наконечник-стрелка
+          radius: 4,
+          fillColor: '#1e3a8a'
+        }
+      }
     }]
   });
 }
 
+
+
+  
 
 
 // === Обработка кнопки "Ганта" ===

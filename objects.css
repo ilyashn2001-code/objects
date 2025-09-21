@@ -378,3 +378,51 @@ body {
 .btn-accent:hover {
   background: var(--accent-hover);
 }
+/* --- Разделительная линия под заголовком модалки --- */
+.chat-box-header {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color); /* 👈 добавили линию */
+}
+
+/* --- Таблица документов --- */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.doc-table th {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.doc-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+/* --- Уменьшенная кнопка удалить --- */
+.doc-table button {
+  padding: 3px 8px;   /* 👈 уменьшили */
+  font-size: 12px;    /* 👈 меньше шрифт */
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: #f8f8f8;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.doc-table button:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}

@@ -146,14 +146,19 @@
 <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
 
 
-<!-- Модалка документов -->
+
+<!-- 📁 Модалка документов -->
 <div id="documentModal" class="chat-modal">
-  <div class="chat-box" style="width: 1050px; max-height: 85vh; overflow-y: auto;">
+  <div class="chat-box" style="width: 1050px; max-height: 85vh; display: flex; flex-direction: column;">
+    
+    <!-- Заголовок -->
     <div class="chat-box-header">
       <h3>Документы по объекту</h3>
       <span class="chat-close document-close">&times;</span>
     </div>
-    <div class="chat-box-body">
+
+    <!-- Таблица -->
+    <div class="chat-box-body" style="flex: 1; overflow-y: auto; padding: 0;">
       <table class="doc-table">
         <thead>
           <tr>
@@ -165,6 +170,23 @@
         <tbody id="documentTableBody"></tbody>
       </table>
     </div>
+
+    <!-- Кнопка Сохранить -->
+    <div style="padding: 12px 16px; text-align: center; border-top: 1px solid var(--border-color); background: var(--input-bg);">
+      <button id="saveDocumentsBtn" style="
+        padding: 10px 24px;
+        font-size: 14px;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      ">
+        Сохранить
+      </button>
+    </div>
+
   </div>
 </div>
 

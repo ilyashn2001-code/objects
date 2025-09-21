@@ -276,10 +276,15 @@ document.addEventListener('click', function (e) {
     const card = e.target.closest('.object-card');
     const title = card.querySelector('h3').textContent.trim();
 
-    if (ganttByTitle[title]) {
-      drawHighchartsGantt(ganttByTitle[title], title);
-      document.getElementById('gantModal').style.display = 'flex';
-    } else {
+   if (ganttByTitle[title]) {
+  const data = title === 'Дворовая территория по адресу: Путевой пр. 38'
+    ? ganttByTitle[title]
+    : applyDefaultDates(ganttByTitle[title]);
+
+  drawHighchartsGantt(data, title);
+  document.getElementById('gantModal').style.display = 'flex';
+}
+ else {
       alert(`Диаграмма Ганта не найдена для объекта: ${title}`);
     }
   }

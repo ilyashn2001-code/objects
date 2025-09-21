@@ -122,20 +122,61 @@ body {
 }
 
 .filters {
-  margin: 20px 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin: 20px 0;
 }
 
-.filters input {
-  padding: 10px;
+/* Универсальные стили для всех select и input (кроме поиска) */
+.filters select,
+.filters input:not(#searchInput) {
+  padding: 10px 14px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background: white;
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 8L0.803848 0.5L11.1962 0.5L6 8Z' fill='black'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 36px;
+  flex: 1 1 160px;
+}
+
+/* Сделать ширину авто, но ограничить максимум */
+.filters input[type="date"],
+.filters input[type="text"] {
+  max-width: 180px;
+}
+
+/* Стиль плейсхолдеров */
+.filters input::placeholder {
+  color: black;
+}
+
+/* Белое поле поиска */
+#searchInput {
+  background: var(--input-bg);
+  color: var(--text-color);
   border: 1px solid var(--border-color);
-  background-color: var(--input-bg);
+  padding: 10px 14px;
   border-radius: 6px;
   flex: 1 1 300px;
-  color: var(--text-color);
+  min-width: 240px;
 }
+
+/* При наведении — эффект */
+.filters select:hover,
+.filters input:not(#searchInput):hover {
+  background: #f0f0f0;
+}
+
 
 .filters button {
   padding: 10px 14px;

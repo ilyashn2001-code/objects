@@ -551,3 +551,45 @@ body {
   background-color: white !important;
   color: black !important;
 }
+/* === ОБЩИЙ СТИЛЬ ДЛЯ ВСЕХ ФИЛЬТРОВ === */
+.filters input,
+.filters select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: white;
+  color: black;
+  transition: border 0.2s ease;
+}
+
+.filters input:hover,
+.filters select:hover {
+  border: 2px solid black;
+  background-color: white;
+}
+
+/* === УБИРАЕМ СТРЕЛКИ У input[type="text"] === */
+.filters input[type="text"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  background-image: none !important;
+  padding-right: 12px;
+}
+
+/* === КОМПАКТНЫЕ SELECT === */
+.select-compact {
+  width: 130px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 6L0.5 0.5H9.5L5 6Z' fill='black'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+  padding-right: 28px;
+}
+
+/* === УБИРАЕМ голубой ХОВЕР у input/select === */
+.filters input:hover,
+.filters select:hover {
+  background-color: white !important;
+}

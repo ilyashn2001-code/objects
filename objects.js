@@ -162,13 +162,54 @@ function applyFilters() {
 
 // === ДАННЫЕ ДЛЯ ГАНТА (Путевой пр. 38) ===
 const ganttData = [
-  { name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1 } },
-  { name: 'Фундамент',          start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 0.8 }, dependency: 'Подготовка площадки' },
-  { name: 'Кладка стен',        start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 0.6 }, dependency: 'Фундамент' },
-  { name: 'Крыша',              start: Date.UTC(2024, 5, 1),  end: Date.UTC(2024, 5, 15), completed: { amount: 0.4 }, dependency: 'Кладка стен' },
-  { name: 'Внутренние работы',  start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 0.2 }, dependency: 'Крыша' },
-  { name: 'Благоустройство',    start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 0 },   dependency: 'Внутренние работы' },
-  { name: 'Сдача объекта',      start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 0 },   dependency: 'Благоустройство' }
+  { 
+    name: 'Подготовка площадки',
+    start: Date.UTC(2024, 3, 15),
+    end: Date.UTC(2024, 3, 25),
+    completed: { amount: 1, fill: '#1e3a8a' }
+  },
+  { 
+    name: 'Фундамент',
+    start: Date.UTC(2024, 3, 26),
+    end: Date.UTC(2024, 4, 10),
+    completed: { amount: 0.8, fill: '#1e3a8a' },
+    dependency: 'Подготовка площадки'
+  },
+  { 
+    name: 'Кладка стен',
+    start: Date.UTC(2024, 4, 11),
+    end: Date.UTC(2024, 4, 30),
+    completed: { amount: 0.6, fill: '#1e3a8a' },
+    dependency: 'Фундамент'
+  },
+  { 
+    name: 'Крыша',
+    start: Date.UTC(2024, 5, 1),
+    end: Date.UTC(2024, 5, 15),
+    completed: { amount: 0.4, fill: '#1e3a8a' },
+    dependency: 'Кладка стен'
+  },
+  { 
+    name: 'Внутренние работы',
+    start: Date.UTC(2024, 5, 16),
+    end: Date.UTC(2024, 6, 10),
+    completed: { amount: 0.2, fill: '#1e3a8a' },
+    dependency: 'Крыша'
+  },
+  { 
+    name: 'Благоустройство',
+    start: Date.UTC(2024, 6, 11),
+    end: Date.UTC(2024, 6, 25),
+    completed: { amount: 0, fill: '#1e3a8a' },
+    dependency: 'Внутренние работы'
+  },
+  { 
+    name: 'Сдача объекта',
+    start: Date.UTC(2024, 6, 26),
+    end: Date.UTC(2024, 6, 30),
+    completed: { amount: 0, fill: '#1e3a8a' },
+    dependency: 'Благоустройство'
+  }
 ];
 
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА (Highcharts) ===
@@ -176,7 +217,7 @@ function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
     chart: {
       scrollablePlotArea: {
-        minWidth: 1200,   // таймлайн можно скроллить вправо
+        minWidth: 1200,   // скроллим вправо только время
         scrollPositionX: 1
       }
     },
@@ -184,23 +225,24 @@ function drawHighchartsGantt() {
     xAxis: {
       currentDateIndicator: true,
       tickInterval: 1000 * 60 * 60 * 24 * 30, // шаг = месяц
-      labels: { format: '{value:%d %b}' }     // показываем дни и месяцы
+      labels: { format: '{value:%d %b}' }     // день + месяц
     },
     yAxis: {
       uniqueNames: true,
-      staticScale: 50   // фиксированная высота строк, всегда видно все задачи
+      staticScale: 50, // фиксированная высота строк
+      grid: { columns: [{ title: { text: 'Работы' }, categories: ganttData.map(t => t.name) }] }
     },
     tooltip: {
       pointFormat:
         '<b>{point.name}</b><br/>' +
         '📅 {point.start:%d.%m.%Y} — {point.end:%d.%m.%Y}<br/>' +
-        '⏳ Выполнение: {point.completed.amount:%p}'
+        '⏳ Выполнение: {point.completed.amount:.0%}' // проценты целым числом
     },
     plotOptions: {
       gantt: {
         dataLabels: {
           enabled: true,
-          format: '{point.completed.amount:%p}', // проценты внутри
+          format: '{point.completed.amount:.0%}', // проценты 20%, 40%
           style: { color: 'white', textOutline: 'none' }
         }
       }
@@ -208,7 +250,7 @@ function drawHighchartsGantt() {
     series: [{
       name: 'Работы',
       data: ganttData,
-      color: '#60a5fa' // голубой (оставшееся)
+      color: '#60a5fa' // голубой — оставшееся
     }]
   });
 }

@@ -174,7 +174,7 @@ const ganttData = [
 // === ФУНКЦИЯ РИСОВАНИЯ ГАНТА (Highcharts) ===
 function drawHighchartsGantt() {
   Highcharts.ganttChart('gantChart', {
-    title: { text: 'Диаграмма Ганта — Путевой пр. 38' },
+   title: { text: '' },
     xAxis: { currentDateIndicator: true },
     yAxis: { uniqueNames: true },
     tooltip: {

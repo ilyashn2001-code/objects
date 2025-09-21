@@ -593,3 +593,8 @@ body {
 .filters select:hover {
   background-color: white !important;
 }
+/* === Явный стиль для всех плейсхолдеров input === */
+.filters input::placeholder {
+  color: #555 !important;
+  opacity: 1;
+}

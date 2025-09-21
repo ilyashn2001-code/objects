@@ -502,3 +502,8 @@ body {
   font-size: 14px;
   max-width: 160px;
 }
+/* Плейсхолдеры белые */
+#dateStartFilter::placeholder,
+#dateEndFilter::placeholder {
+  color: white;
+}

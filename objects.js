@@ -68,7 +68,7 @@ const objects = [
         <div class="actions">
           <button>Ганта</button>
           <button>Документы</button>
-          <button class="chat-open-btn">Открыть чат ✏️</button>
+          <button class="chat-open-btn">Открыть чат</button>
         </div>
       `;
       container.appendChild(card);

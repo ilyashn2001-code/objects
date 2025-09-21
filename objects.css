@@ -470,3 +470,20 @@ body {
 .doc-table button:hover {
   background: #b02a37;      /* тёмно-красный при наведении */
 }
+/* --- Кнопка Удалить: серая по умолчанию, красная при hover --- */
+.doc-table button {
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: #f1f1f1;   /* светло-серая */
+  color: #333;           /* тёмный текст */
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.doc-table button:hover {
+  background: #dc3545;   /* красный фон */
+  color: #fff;           /* белый текст */
+  border-color: #dc3545; /* красная рамка */
+}

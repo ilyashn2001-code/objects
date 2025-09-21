@@ -487,3 +487,54 @@ body {
   color: #fff;           /* белый текст */
   border-color: #dc3545; /* красная рамка */
 }
+/* Контейнер с выбором чата */
+.chat-select {
+  display: flex;
+  flex-direction: column;  /* 👈 в столбик */
+  gap: 10px;
+  padding: 20px;
+}
+
+/* Кнопки чатов */
+.chat-option {
+  padding: 12px 16px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: none;
+  background: var(--accent);   /* голубой фон */
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  text-align: left; /* текст прижат влево */
+}
+
+.chat-option:hover {
+  background: var(--accent-hover);
+  transform: translateX(4px); /* чуть уезжает вправо при наведении */
+}
+
+/* Тело сообщений */
+#chatBody {
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Кнопка Назад */
+#chatBackBtn {
+  margin: 0 20px 20px 20px;
+  align-self: flex-start;
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  background: #f1f1f1;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+#chatBackBtn:hover {
+  background: #ddd;
+  transform: translateX(-4px); /* уезжает влево при наведении */
+}

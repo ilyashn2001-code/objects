@@ -538,7 +538,9 @@ body {
 .narrow-input {
   background-color: white !important;
   color: black !important;
-  border: 1px solid var(--border-color) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px 14px;
 }
 
 .narrow-input::placeholder {

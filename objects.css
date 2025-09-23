@@ -567,4 +567,18 @@ body {
   transform: translateX(4px);
 }
 
+.sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar li i {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+
 

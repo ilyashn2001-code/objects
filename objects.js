@@ -229,18 +229,18 @@ const ganttByTitle = {
 ]),
 
 'Дворовая территория по адресу: Челобитьевское шоссе 14 к.3, 14 к.4, 14 к.5': applyDefaultDates([
-  { id: 'task0', name: 'Замена ограждения контейнерной площадки в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' },  contract: '11111' },
-  { id: 'task1', name: 'ОБУСТРОЙСТВО МАФ ТЕРРИТОРИЙ', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task0' },
-  { id: 'task2', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task1' },
-  { id: 'task3', name: 'Устройство покрытия асфальтобетонного пешеходной дорожки в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task2' }
+  { id: 'task0', name: 'Замена ограждения контейнерной площадки в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' },  contract: '10/03-10' },
+  { id: 'task1', name: 'ОБУСТРОЙСТВО МАФ ТЕРРИТОРИЙ', completed: { amount: 1, fill: '#1e3a8a' }, contract: '510-ОРКИС-21', dependency: 'task0' },
+  { id: 'task2', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '86503-О', dependency: 'task1' },
+  { id: 'task3', name: 'Устройство покрытия асфальтобетонного пешеходной дорожки в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '102609-01-ДО', dependency: 'task2' }
 ]),
 
 'Дворовая территория по адресу: Мира просп. 194': applyDefaultDates([
-  { id: 'task0', name: 'Устройство садового бортового камня в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' },  contract: '11111' },
-  { id: 'task1', name: 'Ремонт покрытия асфальтобетонного автопарковки в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task0' },
-  { id: 'task2', name: 'Ремонт покрытия асфальтобетонного тротуара в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task1' },
-  { id: 'task3', name: 'Ремонт покрытия асфальтобетонного проезда в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task2' },
-  { id: 'task4', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '11111', dependency: 'task3' }
+  { id: 'task0', name: 'Устройство садового бортового камня в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' },  contract: '472-2021' },
+  { id: 'task1', name: 'Ремонт покрытия асфальтобетонного автопарковки в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '21000049', dependency: 'task0' },
+  { id: 'task2', name: 'Ремонт покрытия асфальтобетонного тротуара в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '21000016', dependency: 'task1' },
+  { id: 'task3', name: 'Ремонт покрытия асфальтобетонного проезда в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '5/21-0505', dependency: 'task2' },
+  { id: 'task4', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 1, fill: '#1e3a8a' }, contract: '2945-АТР-21', dependency: 'task3' }
 ]),
 
 };

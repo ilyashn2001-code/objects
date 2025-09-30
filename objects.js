@@ -209,7 +209,7 @@ const ganttByTitle = {
  'Дворовая территория по адресу: Каргопольская ул. 18': applyDefaultDates([
   { id: 'task0', name: 'Устройство садового бортового камня в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: 'ГМЦ-08/20-20' },
   { id: 'task1', name: 'Замена садового бортового камня в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '1502-123-2020', dependency: 'task0' },
-  { id: 'task2', name: 'Ремонт газона в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '11111', dependency: 'task1' },
+  { id: 'task2', name: 'Ремонт газона в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: 'ИГ-14460/1783', dependency: 'task1' },
   { id: 'task3', name: 'Замена покрытия из резиновой крошки спортивной площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '102-341/20', dependency: 'task2' },
   { id: 'task4', name: 'Устройство покрытия асфальтобетонного пешеходной дорожки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '463/49-20', dependency: 'task3' },
   { id: 'task5', name: 'Замена покрытия из резиновой крошки детской площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '14', dependency: 'task4' },

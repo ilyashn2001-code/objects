@@ -175,7 +175,7 @@ function applyDefaultDates(tasks) {
   
 const ganttByTitle = {
 'Дворовая территория по адресу: Путевой пр. 38': [
-  { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' } },
+  { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' },  contract: '№123-К' },
   { id: 'task1', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task0' },
   { id: 'task2', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task1' },
   { id: 'task3', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task2' },
@@ -265,13 +265,14 @@ function drawHighchartsGantt(data, title = '') {
       uniqueNames: true,
       staticScale: 50
     },
-    tooltip: {
-      formatter: function () {
-        return `<b>${this.point.name}</b><br/>
-                📅 ${Highcharts.dateFormat('%d.%m.%Y', this.point.start)} — ${Highcharts.dateFormat('%d.%m.%Y', this.point.end)}<br/>
-                ⏳ Выполнение: ${Highcharts.numberFormat(this.point.completed.amount * 100, 0)}%`;
-      }
-    },
+ tooltip: {
+  formatter: function () {
+    return `<b>${this.point.name}</b><br/>
+            📅 ${Highcharts.dateFormat('%d.%m.%Y', this.point.start)} — ${Highcharts.dateFormat('%d.%m.%Y', this.point.end)}<br/>
+            ⏳ Выполнение: ${Highcharts.numberFormat(this.point.completed.amount * 100, 0)}%<br/>
+            📄 Контракт: ${this.point.contract || '—'}`;
+  }
+},
     plotOptions: {
       gantt: {
         dataLabels: {

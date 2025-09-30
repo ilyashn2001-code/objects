@@ -175,36 +175,36 @@ function applyDefaultDates(tasks) {
   
 const ganttByTitle = {
 'Дворовая территория по адресу: Путевой пр. 38': [
-  { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' },  contract: '№123-К' },
-  { id: 'task1', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task0' },
-  { id: 'task2', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task1' },
-  { id: 'task3', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task2' },
-  { id: 'task4', name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task3' },
-  { id: 'task5', name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task4' },
-  { id: 'task6', name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 1, fill: '#1e3a8a' }, dependency: 'task5' }
+  { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' },  contract: '№123' },
+  { id: 'task1', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№123', dependency: 'task0' },
+  { id: 'task2', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№123', dependency: 'task1' },
+  { id: 'task3', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№123', dependency: 'task2' },
+  { id: 'task4', name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№123', dependency: 'task3' },
+  { id: 'task5', name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№123', dependency: 'task4' },
+  { id: 'task6', name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№123', dependency: 'task5' }
 ],
 
 
 'Дворовая территория по адресу: Флотская ул. 54, 58 к.1': applyDefaultDates([
-  { id: 'task0', name: 'Ремонт покрытия асфальтобетонного проезда в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' } },
-  { id: 'task1', name: 'Ремонт люка подземных коммуникаций (смотрового колодца) в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task0' },
-  { id: 'task2', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task1' },
-  { id: 'task3', name: 'Замена садового бортового камня в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task2' },
-  { id: 'task4', name: 'Ремонт покрытия асфальтобетонного тротуара в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task3' },
-  { id: 'task5', name: 'Ремонт газона в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task4' },
-  { id: 'task6', name: 'Ремонт покрытия асфальтобетонного пешеходной дорожки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task5' },
-  { id: 'task7', name: 'Устройство покрытия из резиновой крошки детской площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task6' },
-  { id: 'task8', name: 'Установка ограждения контейнерной площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task7' },
-  { id: 'task9', name: 'Установка ограждения детской площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task8' },
-  { id: 'task10', name: 'Установка информационного стенда в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task9' },
-  { id: 'task11', name: 'Установка скамьи в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task10' },
-  { id: 'task12', name: 'Установка урны в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task11' },
-  { id: 'task13', name: 'Установка игрового детского комплекса 1 категории в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task12' },
-  { id: 'task14', name: 'Установка игрового элемента карусель в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task13' },
-  { id: 'task15', name: 'Установка игрового элемента качалка в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task14' },
-  { id: 'task16', name: 'Установка игрового элемента качели в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task15' },
-  { id: 'task17', name: 'Установка игрового элемента песочница в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task16' },
-  { id: 'task18', name: 'Установка спортивного детского комплекса 1 категории в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, dependency: 'task17' }
+  { id: 'task0', name: 'Ремонт покрытия асфальтобетонного проезда в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123' },
+  { id: 'task1', name: 'Ремонт люка подземных коммуникаций (смотрового колодца) в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task0' },
+  { id: 'task2', name: 'Замена дорожного бортового камня в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task1' },
+  { id: 'task3', name: 'Замена садового бортового камня в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task2' },
+  { id: 'task4', name: 'Ремонт покрытия асфальтобетонного тротуара в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task3' },
+  { id: 'task5', name: 'Ремонт газона в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task4' },
+  { id: 'task6', name: 'Ремонт покрытия асфальтобетонного пешеходной дорожки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task5' },
+  { id: 'task7', name: 'Устройство покрытия из резиновой крошки детской площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task6' },
+  { id: 'task8', name: 'Установка ограждения контейнерной площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task7' },
+  { id: 'task9', name: 'Установка ограждения детской площадки в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task8' },
+  { id: 'task10', name: 'Установка информационного стенда в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task9' },
+  { id: 'task11', name: 'Установка скамьи в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task10' },
+  { id: 'task12', name: 'Установка урны в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task11' },
+  { id: 'task13', name: 'Установка игрового детского комплекса 1 категории в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task12' },
+  { id: 'task14', name: 'Установка игрового элемента карусель в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task13' },
+  { id: 'task15', name: 'Установка игрового элемента качалка в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task14' },
+  { id: 'task16', name: 'Установка игрового элемента качели в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task15' },
+  { id: 'task17', name: 'Установка игрового элемента песочница в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task16' },
+  { id: 'task18', name: 'Установка спортивного детского комплекса 1 категории в рамках благоустройства территории', completed: { amount: 1.00, fill: '#1e3a8a' }, contract: '№123', dependency: 'task17' }
 ]),
 
  'Дворовая территория по адресу: Каргопольская ул. 18': applyDefaultDates([

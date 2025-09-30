@@ -175,13 +175,12 @@ function applyDefaultDates(tasks) {
   
 const ganttByTitle = {
 'Дворовая территория по адресу: Путевой пр. 38': [
-  { id: 'task0', name: 'Подготовка площадки', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' },  contract: 'ОУ3/ОТ1' },
-  { id: 'task1', name: 'Фундамент', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 1, fill: '#1e3a8a' }, contract: '0718-19Р', dependency: 'task0' },
-  { id: 'task2', name: 'Кладка стен', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№ ЭМ-39/18-У ', dependency: 'task1' },
-  { id: 'task3', name: 'Крыша', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 1, fill: '#1e3a8a' }, contract: '37-1694-19КС', dependency: 'task2' },
-  { id: 'task4', name: 'Внутренние работы', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 1, fill: '#1e3a8a' }, contract: '15801-УР-19 3/6450-19', dependency: 'task3' },
-  { id: 'task5', name: 'Благоустройство', start: Date.UTC(2024, 6, 11), end: Date.UTC(2024, 6, 25), completed: { amount: 1, fill: '#1e3a8a' }, contract: '4316784/99', dependency: 'task4' },
-  { id: 'task6', name: 'Сдача объекта', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 1, fill: '#1e3a8a' }, contract: '40/19-65-0113', dependency: 'task5' }
+  { id: 'task0', name: 'Ремонт покрытия асфальтобетонного проезда в рамках благоустройства территории', start: Date.UTC(2024, 3, 15), end: Date.UTC(2024, 3, 25), completed: { amount: 1, fill: '#1e3a8a' },  contract: 'ОУ3/ОТ1' },
+  { id: 'task1', name: 'Устройство покрытия асфальтобетонного проезда в рамках благоустройства территории', start: Date.UTC(2024, 3, 26), end: Date.UTC(2024, 4, 10), completed: { amount: 1, fill: '#1e3a8a' }, contract: '0718-19Р', dependency: 'task0' },
+  { id: 'task2', name: 'Ремонт покрытия асфальтобетонного тротуара в рамках благоустройства территории', start: Date.UTC(2024, 4, 11), end: Date.UTC(2024, 4, 30), completed: { amount: 1, fill: '#1e3a8a' }, contract: '№ ЭМ-39/18-У ', dependency: 'task1' },
+  { id: 'task3', name: 'Замена дорожного бортового камня в рамках благоустройства территории', start: Date.UTC(2024, 5, 1), end: Date.UTC(2024, 5, 15), completed: { amount: 1, fill: '#1e3a8a' }, contract: '37-1694-19КС', dependency: 'task2' },
+  { id: 'task4', name: 'Устройство дорожного бортового камня в рамках благоустройства территории', start: Date.UTC(2024, 5, 16), end: Date.UTC(2024, 6, 10), completed: { amount: 1, fill: '#1e3a8a' }, contract: '15801-УР-19 3/6450-19', dependency: 'task3' },
+  { id: 'task6', name: 'Ремонт покрытия асфальтобетонного автопарковки в рамках благоустройства территории', start: Date.UTC(2024, 6, 26), end: Date.UTC(2024, 6, 30), completed: { amount: 1, fill: '#1e3a8a' }, contract: '40/19-65-0113', dependency: 'task5' }
 ],
 
 
